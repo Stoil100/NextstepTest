@@ -1,0 +1,111 @@
+.profileBox{
+    display: grid;
+    grid-template-columns: repeat(4,16vw);
+    grid-template-rows: repeat(3, 25vh);
+    gap: 30px;
+    margin-bottom: 2.5vh;
+}
+
+.box1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color:#fff;
+
+  grid-column-start: 1;
+  grid-column-end: 3;
+    grid-row-start: 1;
+  grid-row-end: 3;
+    box-shadow: 1px 1px 5px #088aee;
+}
+.imageAndUsernameHolder{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    width: 100%;
+}
+.profileImg{
+    border: 2px solid #fff;
+    border-radius: 50%;
+    height: 3vw;
+}
+.infoHolder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.box2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color:#fff;
+
+    grid-column-start: 3;
+    grid-column-end: 5;
+      grid-row-start: 1;
+    grid-row-end: 4;
+      box-shadow: 1px 1px 5px #088aee;
+  }
+ol{
+    list-style-type: decimal;
+}
+
+.levelBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color:#fff;
+
+    grid-column-start:1;
+    grid-column-end: 3;
+      grid-row-start: 3;
+    grid-row-end: 4;
+
+    --border-size: 3px;
+    --border-angle: 0turn;
+    background-image: conic-gradient(#222, #222, #222), conic-gradient(from var(--border-angle), transparent 20%, rgb(0, 238, 255), rgb(6, 167, 179));
+    background-size: calc(100% - (var(--border-size) * 2)) calc(100% - (var(--border-size) * 2)), cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 3px;
+    animation: bg-spin 3s linear infinite;
+  }
+  @keyframes bg-spin {
+    to {
+      --border-angle:1turn;
+    }
+  }
+
+  
+  @property --border-angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0turn;
+  }
+  @media (max-width:600px){
+    .box1{
+        grid-column-start: 1;
+        grid-column-end: 5;
+          grid-row-start: 2;
+        grid-row-end: 3;
+      }
+    .box2{
+        grid-column-start: 1;
+        grid-column-end: 5;
+          grid-row-start: 3;
+        grid-row-end: 4;
+      }
+      .levelBox{
+        grid-column-start: 1;
+        grid-column-end: 5;
+          grid-row-start: 1;
+        grid-row-end: 2;
+      }
+  }

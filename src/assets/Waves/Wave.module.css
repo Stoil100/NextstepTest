@@ -1,0 +1,36 @@
+.waveSVG{
+    position: absolute;
+    display: flex;
+    z-index: -1;
+    width: 100vw;
+
+ }
+ svg{
+    height: 300px;
+ }
+ use {
+    animation: move-forever 7.5s linear infinite;
+  }
+  use:nth-child(1) {
+    animation-duration: 20s;
+    opacity: 0.4;
+  }
+  use:nth-child(2) {
+    animation-duration: 15s;
+    animation-delay: -1.5s;
+    opacity: 0.3;
+  }
+  use:nth-child(3) {
+    animation-duration: 10s;
+    opacity: 0.2;
+  }
+  
+  @keyframes move-forever {
+    0% {
+      transform: translate(-2px, 0);
+    }
+    100% {
+      transform: translate(0px, 0);
+    }
+  }
+  

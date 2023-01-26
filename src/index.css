@@ -1,0 +1,14 @@
+@import url('https://fonts.cdnfonts.com/css/aquire');
+@import url('https://fonts.cdnfonts.com/css/cocosignum-maiuscoletto');
+@import url('https://fonts.cdnfonts.com/css/adelle-cyrillic');
+@import url('https://fonts.cdnfonts.com/css/micro-n56');
+*{
+    margin: 0;
+    padding:0;
+    font-family:"aquire";
+    text-decoration: none;
+}
+input{
+    color:#000;
+}
+

@@ -1,0 +1,43 @@
+
+nav{
+    background-color:transparent;
+    width: 100vw;
+    max-width: 100vw;
+    height:10vh;
+    background-color:#055C9D;
+    color:aliceblue;
+    display: flex; 
+    overflow: hidden;   
+    top:0;
+    position:sticky;
+    z-index: 100;
+}
+li h2{
+    font-size: 3rem;
+}
+li a{
+    font-size: 2rem;
+}
+li{
+    display: flex;
+    flex:0.2;
+    height: 80%;
+    justify-content: center;
+    align-items: center;
+}
+ul{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navItems{
+    justify-content: space-around;
+}
+.navItems input{
+    height: 70%;
+    width: 80%;
+    background-color: #fff;
+}
+
+

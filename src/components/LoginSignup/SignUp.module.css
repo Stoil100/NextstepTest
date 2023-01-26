@@ -1,0 +1,77 @@
+h2{
+    font-size:30px;
+}
+p{
+    font-size:15px;
+}
+span{
+    color:blue;
+    cursor: pointer;
+}
+span:hover{
+    text-decoration:underline;
+}
+
+.form{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    flex-direction:column;
+    border-radius:10px;
+    width: 500px;
+    height:550px;
+    background:#fff;
+    margin-bottom: 30px;
+}
+.buttons{
+    width: 50%;
+    height:40px;
+    cursor:pointer;
+    transition:0.3s;
+    font-weight: 100;
+    font-size: 15px;
+    border-radius:10px;
+}
+.buttons:hover{
+    font-size:20px;
+}
+.signUpButton{
+    border:1px solid #24bdff;
+    background-color:rgba(0,136,255,0.2);  
+}
+.signUpButton:hover{
+    background-color:#24bdff;
+}
+.facebookButton{
+    width: 60%;
+    background-color:#4267B2;
+    border:0.5px solid #00194c;
+}
+.googleButton{
+    width: 60%;
+    border:0.5px solid gray;
+}
+input{
+    height:40px;
+    width:70%;
+    border:0.5px solid gray;
+    border-radius:5px;
+    background:transparent;
+}
+
+.orUseBox{
+    width:70%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+hr {
+  	background-color: transparent;
+	border-top: 1px dashed #8c8b8b;
+    width:43%;
+}
+@media(max-width:600px){
+    .form{
+        width: 100vw;
+    }
+}

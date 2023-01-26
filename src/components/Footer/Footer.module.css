@@ -1,0 +1,18 @@
+.footer{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.contactHolder{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.footerItemsHolder{
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
