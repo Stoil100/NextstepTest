@@ -12,7 +12,7 @@ const Profile = (props) => {
     <Card className={styles.profileBox}>
       <Card className={`${styles.box1} `}>
         <div className={styles.imageAndUsernameHolder}>
-          <img src={personIcon} className={styles.profileImg}></img>
+          <img src={personIcon} className={styles.profileImg} alt="profileImg"></img>
           <h2>{ctx.usernameValue}</h2>
         </div>
         <hr></hr>

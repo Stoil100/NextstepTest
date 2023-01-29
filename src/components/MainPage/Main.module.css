@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: repeat(1, 100vw);
     grid-template-rows: repeat(2, 100vh) 40vh;
+    color: #fff
 }
 
 h1 {
@@ -91,59 +92,109 @@ h3 {
 
 .section2 {
     display: flex;
-    justify-content: center;
-    position: static;
-   top:0;
-    border:1px solid red;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    background: hsla(226, 42%, 37%, 1);
+
+    background: linear-gradient(270deg, hsla(226, 42%, 37%, 1) 0%, hsla(190, 79%, 59%, 1) 100%, hsla(191, 75%, 58%, 1) 100%);
+    transform: skew(0, 10deg);
 }
-.triangleHolder{
-    display: flex;
+
+.infoHolder {
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    
 }
-.arrowRight {
-    width: 0; 
-    height: 0; 
-    border-top: 50vh solid transparent;
-    border-bottom: 50vh solid transparent;
-    border-left: solid rgba(57, 181, 224,0.7);
-    transition: 0.2s;
-    position: absolute;
-    filter: blur(3px);
-  }
-  
-  .arrowLeft {
-    width: 0; 
-    height: 0; 
-    border-top: 50vh solid transparent;
-    border-bottom: 50vh solid transparent;
-    border-right: solid rgba(57, 181, 224,0.7);
-    transition: 0.2s;
-    position: absolute;
-    right: 0;
-    filter: blur(3px);
-  }
 
+.infoBox {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 10vw;
+    opacity: 0;
+    transform: scale(.75);
+    width: 20%;
+    padding: 10px;
+    border: 2px solid #222;
+    border-radius: 5px;
+   box-shadow: 10px 10px #222;
+   transition: 1s;
+}
+.infoBox p{
+    font-size: 1.5vw;
+}
+.infoBox1.active {
+    opacity: 1;
+    transition: 1s;
+    transform: translateY(-150%) scale(1);
+  }
+.infoBox2.active {
+    opacity: 1;
+    transition: 2s;
+    transform: translateY(-75%) scale(1);
+  }
+.infoBox3.active {
+    opacity: 1;
+    transition: 2.2s;
+    transform: translateY(0%) scale(1);
+  }
+.infoBox3 a{
+    border: 10px solid rgba(22, 27, 64, 0.1);
+    background-color: rgba(22, 27, 64, 0.1);
+    border-radius: 10px;
+    transition: 0.5s;
+}
+.infoBox3 a:hover{
+    border: 10px solid rgba(22, 27, 64, 1);
+    background-color: rgba(22, 27, 64, 1);
+}
+.circlePoint {
+    border: 2px solid #fff;
+    text-align: center;
+    border-radius: 50%;
+}
 
-  @media (max-width:600px) {
-    h1,h3,p,span{
+@media (max-width:600px) {
+
+    h1,
+    h3,
+    p,
+    span {
         font-size: 50px;
     }
-    h2,a{
+
+    h2,
+    a {
         font-size: 30px;
     }
-    .section1{
+
+    .section1 {
         justify-content: space-evenly;
         align-items: center;
         flex-direction: column;
         text-align: center;
     }
-    .section1Holder1{
+
+    .section1Holder1 {
         flex: 0;
         margin: 0;
     }
-    .section1Holder2{
+
+    .section1Holder2 {
         flex: 0;
         margin: 0;
     }
-  }
+    .section2{
+        text-align: center;
+    }
+    .infoHolder{
+        flex-direction: column;
+        align-items: center;
+    }
+    .infoBox p,.infoBox h2,.infoBox a{
+        font-size: 10px;
+    }
+}

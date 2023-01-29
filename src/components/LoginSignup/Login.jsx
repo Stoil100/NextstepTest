@@ -127,7 +127,7 @@ const SignUp = (props) => {
           Log in
         </Button>
         <p>
-          Don't have an account? <span>Log in</span>
+          Don't have an account? <span>Sing up</span>
         </p>
         <Card className={styles.orUseBox}>
           <hr></hr>

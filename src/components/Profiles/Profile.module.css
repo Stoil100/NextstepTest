@@ -51,6 +51,8 @@
       grid-row-start: 1;
     grid-row-end: 4;
       box-shadow: 1px 1px 5px #088aee;
+
+      
   }
 ol{
     list-style-type: decimal;

@@ -20,7 +20,8 @@ function App() {
     <>
     <Card className={styles.Box}>
       <Nav/>
-      {!ctx.isLoggedIn && <Login />}
+      
+      {!ctx.isLoggedIn && <Login/>}
         {ctx.isLoggedIn && <Profile />}
       <MenuButton/>
     </Card>
