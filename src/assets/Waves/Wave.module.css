@@ -1,5 +1,6 @@
 .waveSVG{
-    position: absolute;
+    position: fixed;
+    bottom: 0;
     display: flex;
     z-index: -1;
     width: 100vw;

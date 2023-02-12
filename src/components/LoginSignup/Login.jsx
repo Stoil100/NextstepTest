@@ -1,4 +1,6 @@
 import React, { useState, useContext } from "react";
+import { Link,useNavigate } from "react-router-dom";
+import jwt from 'jwt-decode';
 
 import styles from "./SignUp.module.css";
 
@@ -13,8 +15,9 @@ const SignUp = (props) => {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredUsername, setEnteredUsername] = useState("");
-  const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
-  const [error, setErorr] = useState();
+  const [error, setErorr] = useState(); 
+  const navigate = useNavigate();
+
 
   const submitUserData = (e) => {
     e.preventDefault();
@@ -42,6 +45,7 @@ const SignUp = (props) => {
         password: `${enteredPassword}`,
       };
       getApiResponse(sendApiData);
+      
       return;
     }
     props.onAddUser(enteredEmail, enteredPassword, enteredUsername);
@@ -55,6 +59,7 @@ const SignUp = (props) => {
       ctx.setEmlValue(enteredEmail);
       ctx.setPswrdValue(enteredPassword);
       ctx.onLogin(enteredEmail, enteredPassword, enteredUsername);
+      navigate('/profile');
     } else {
       setErorr({
         title: "User does not exist!",
@@ -78,18 +83,22 @@ const SignUp = (props) => {
     setErorr(null);
   };
 
-  let getApiResponse = async (propsData) => {
-    console.log(propsData);
-    let response = await fetch("http://127.0.0.1:8000/accounts/auth/", {
+  const getApiResponse = async (props) => {
+    const response = await fetch("http://127.0.0.1:8000/accounts/token/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(propsData),
+      body: JSON.stringify(props),
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.token != undefined) {
+        console.log(data)
+        if (data.access !== undefined) {
+          localStorage.setItem("access token",data.access);
+          localStorage.setItem("refresh token",data.refresh);
+          const decoded=jwt(data.access);
+          console.log(decoded)
           sendApiResponse(true);
         } else {
           sendApiResponse(false);
@@ -98,7 +107,6 @@ const SignUp = (props) => {
       .catch((error) => {
         console.error("Error:", error);
       });
-    let data = await response.json();
   };
 
   return (
@@ -111,32 +119,35 @@ const SignUp = (props) => {
         />
       )}
       <form className={styles.form} onSubmit={submitUserData}>
-        <h2>Log in</h2>
+        <h2>Вход</h2>
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Име"
           onChange={usernameChangeHandler}
         />
-        <input type="email" placeholder="Email" onChange={emailChangeHandler} />
+        <input type="email" placeholder="Емейл" onChange={emailChangeHandler} />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Парола"
           onChange={passwordChangeHandler}
         />
         <Button className={`${styles.signUpButton} ${styles.buttons}`}>
-          Log in
+         Влез
         </Button>
         <p>
-          Don't have an account? <span>Sing up</span>
+          Нямате профил?{" "}
+          <Link to={"/signup"}>
+            <span>Регистрирайте се</span>
+          </Link>
         </p>
-        <Card className={styles.orUseBox}>
+       {/* <Card className={styles.orUseBox}>
           <hr></hr>
           <p>Or</p>
           <hr></hr>
         </Card>
         <Button className={`${styles.googleButton} ${styles.buttons}`}>
           Log in with Google
-        </Button>
+        </Button>*/}
       </form>
     </Card>
   );

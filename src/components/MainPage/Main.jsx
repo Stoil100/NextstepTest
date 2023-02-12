@@ -1,4 +1,5 @@
 import {useEffect, useRef, useState} from 'react';
+import { Link } from "react-router-dom";
 import Button from "../UI/Buttons/LoginButton";
 import Card from "../UI/Cards/Card";
 import tradingImg from "../../assets/trading.jpg";
@@ -9,7 +10,7 @@ const MainPage = () => {
   const infoBox = useRef(null);
   const[showClasses,setShowClasses]=useState(false);
 
-  function debounce(func, wait = 10, immediate = true) {
+  function debounce(func, wait = 1, immediate = true) {
     var timeout;
     return function() {
       var context = this, args = arguments;
@@ -44,19 +45,19 @@ const MainPage = () => {
     <Card className={styles.mainBox}>
       <section className={`${styles.section} ${styles.section1}`}>
         <Card className={styles.section1Holder1}>
-          <h1>What is the Nextstep in trading?</h1>
-          <h3>We will help you make it!</h3>
+          <h1>Каква е следващата стъпка в търговията?</h1>
+          <h3>Ние ще ви помогнем да я направите!</h3>
         </Card>
         <Card className={styles.section1Holder2}>
-          <a className={styles.headerButton}>
-            <span className={styles.headerButtonText}>Sign up</span>
-          </a>
-          <h3>To begin your journy!</h3>
+          <Link to={'/signup'} className={styles.headerButton}>
+            <span className={styles.headerButtonText}>Регистрирайте се</span>
+          </Link>
+          <h3>За да започнете обучението си!</h3>
         </Card>
       </section>
       <section className={`${styles.section} ${styles.section2}`}>
         <div>
-          <h2>Upgrade your knowladge from your own starting point!</h2>
+          <h2 className={styles.section2Title}>Усъвършенствайте знанията си от собствената си отправна точка!</h2>
         </div>
         <Card className={styles.infoHolder}>
           <div
@@ -67,8 +68,8 @@ const MainPage = () => {
           >
             <h3 className={styles.circlePoint}>1</h3>
             <p>
-              Take our quiz to define your knowladge level in trading with
-              crypto, stocks and forex
+            Вземете нашия тест, за да определите нивото си на знания в търговията с
+              криптовалути, акции и форекс
             </p>
           </div>
           <div
@@ -78,7 +79,7 @@ const MainPage = () => {
             ref={infoBox}
           >
             <h3 className={styles.circlePoint}>2</h3>
-            <p>Your knowladge level will help us find what's best for you!</p>
+            <p>Вашето ниво на познания ще ни помогне да намерим най-доброто за вас!</p>
           </div>
           <div
             className={`
@@ -90,7 +91,7 @@ const MainPage = () => {
             ref={infoBox}
           >
             <h3 className={styles.circlePoint}>3</h3>
-            <a>GET STARTED!</a>
+            <Link to={'/signup'}>ЗАПОЧНЕТЕ!</Link>
           </div>
         </Card>
       </section>

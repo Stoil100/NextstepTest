@@ -8,6 +8,8 @@ import AuthContext from "../store/auth-context";
 
 const Profile = (props) => {
   const ctx=useContext(AuthContext);
+
+  console.log(ctx)
   return (
     <Card className={styles.profileBox}>
       <Card className={`${styles.box1} `}>
@@ -17,12 +19,12 @@ const Profile = (props) => {
         </div>
         <hr></hr>
         <div className={styles.infoHolder}>
-            <h3>Емайл:</h3>
+            <h3>Емeйл:</h3>
             <h4>{ctx.emailValue}</h4>
         </div>
         <div className={styles.infoHolder}>
-            <h3>Парола:</h3>
-            <h4>{ctx.passwordValue}</h4>
+            <h3>NXST точки:</h3>
+            <h4>{ctx.pointsValue}</h4>
         </div>
       </Card>
       <Card className={`${styles.levelBox} `}>

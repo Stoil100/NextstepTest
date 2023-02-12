@@ -13,6 +13,7 @@ export const AuthContextProvider = (props) => {
   const [usernameValue, setUsernameValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [pointsValue, setPointsValue] = useState("");
   let stationaryUsernameValue = "";
   let stationaryEmailValue = "";
   let stationaryPasswordValue = "";
@@ -22,6 +23,7 @@ export const AuthContextProvider = (props) => {
     const storedUsername = localStorage.getItem("usernameValue");
     const storedEmail = localStorage.getItem("emailValue");
     const storedPassword = localStorage.getItem("passwordValue");
+    const storedPointsValue=localStorage.getItem("pointsValie");
     if (storedLoggedIn === "1") {
       setIsLoggedIn(true);
     }
@@ -34,16 +36,22 @@ export const AuthContextProvider = (props) => {
     if (storedPassword !== null) {
       setPasswordValue(storedPassword);
     }
+    if(storedPointsValue!==null){
+      setPointsValue(storedPointsValue);
+    }
   }, []);
 
   const usernameValueHandler = (props) => {
-    stationaryUsernameValue=props;
+    stationaryUsernameValue = props;
   };
   const emailValueHandler = (props) => {
-    stationaryEmailValue=props;
+    stationaryEmailValue = props;
   };
   const passwordValueHandler = (props) => {
-    stationaryPasswordValue=props;
+    stationaryPasswordValue = props;
+  };
+  const pointsValueHandler = (props) => {
+    setPointsValue(props);
   };
 
   const logoutHandler = () => {
@@ -51,6 +59,7 @@ export const AuthContextProvider = (props) => {
     localStorage.removeItem("usernameValue");
     localStorage.removeItem("emailValue");
     localStorage.removeItem("passwordValue");
+    localStorage.removeItem("pointsValue");
     setIsLoggedIn(false);
     setUsernameValue("");
     setEmailValue("");
@@ -75,9 +84,11 @@ export const AuthContextProvider = (props) => {
         emailValue: emailValue,
         usernameValue: usernameValue,
         passwordValue: passwordValue,
+        pointsValue: pointsValue,
         setEmlValue: emailValueHandler,
         setPswrdValue: passwordValueHandler,
         setUsrnmValue: usernameValueHandler,
+        setPntsValue: pointsValueHandler,
         onLogout: logoutHandler,
         onLogin: loginHandler,
       }}

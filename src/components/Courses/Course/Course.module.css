@@ -1,0 +1,7 @@
+.coursesTitle{
+    text-align: center;
+    border:1px solid red;
+}
+.coursesBox{
+    justify-self: flex-start;
+}

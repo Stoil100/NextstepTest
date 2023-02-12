@@ -1,0 +1,11 @@
+.newsBox{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap:10px;
+}
+.newsMainTitle{
+    color:#fff;
+    margin: 20px;
+}

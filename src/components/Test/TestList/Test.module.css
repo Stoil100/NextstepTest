@@ -1,0 +1,25 @@
+body{
+    transition: 0.5s;
+
+}
+.testHolder{
+    flex-direction: column;
+}
+.prevQ,.nextQ{
+    z-index: 10;
+    position: fixed;
+    font-size: xx-large;
+    transition:0.4s;
+    width: fit-content;
+}
+.prevQ{
+    top:50%;
+    margin-right:90%;
+}
+.nextQ{
+    top:50%;
+    margin-left:90%;
+}
+.prevQ:hover,.nextQ:hover{
+    transform: scale(1.3);
+}

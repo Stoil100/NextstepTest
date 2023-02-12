@@ -12,7 +12,6 @@ const Footer = () => {
           <h2>Nextstep</h2>
           <h3>Учи бързо, печели бързо</h3>
           <a href="mailto:toli100ilov@gmail.com" className={styles.contacts}>
-            <img src={gmailIcon} alt="" />
             <p>Свържете се с нас</p>
           </a>
         </Card>
@@ -30,6 +29,7 @@ const Footer = () => {
         </Card>
         <Card className={styles.madeByHolder}>
           <p>&copy; 2023/2024 NEXTSTEP - All Rights Reserved</p>
+          <p>/</p>
           <p>Made by Stoil</p>
         </Card>
       </Card>

@@ -1,21 +1,20 @@
 import React,{ useContext } from "react";
 import AuthContext from "../store/auth-context";
+import logo from '../../assets/logo.png'
 
 import styles from "./Nav.module.css";
+import { Link } from "react-router-dom";
 
 const Nav = (props) => {
     const ctx=useContext(AuthContext)
     return (
     <nav>
       <ul className={styles.navBar}>
-        <li className={styles.navItems}>
-          <input value="I"></input>
+        <li>
+          <img src={logo} alt="Nextstep" className={styles.nextstepLogo}/>
         </li>
         <li>
-          <h2>NEXTSTEP</h2>
-        </li>
-        <li>
-          {!ctx.isLoggedIn?<a>Sign up</a>:<a>Courses</a>} 
+          {!ctx.isLoggedIn?<Link to={'/login'}>Log in</Link>:<Link to={"/courses"}>Courses</Link>} 
         </li>
       </ul>
     </nav>

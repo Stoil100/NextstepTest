@@ -5,15 +5,16 @@
     color: #fff
 }
 
-h1 {
-    font-size: 5vw;
+
+.mainBox h1{
+    font-size:5rem;
 }
-
-h3 {
-    font-size: 3vw;
+.mainBox h2{
+    font-size:3rem;
 }
-
-
+.mainBox h3{
+    font-size:2rem;
+}
 .section1 {
     display: flex;
     justify-content: space-around;
@@ -51,7 +52,7 @@ h3 {
     overflow: hidden;
     width: 50%;
     height: 80px;
-    font-size: 2vw;
+    font-size: 1.5rem;
     border: 1px solid rgb(0, 179, 255);
     border-radius: 10px;
 }
@@ -100,7 +101,9 @@ h3 {
     background: linear-gradient(270deg, hsla(226, 42%, 37%, 1) 0%, hsla(190, 79%, 59%, 1) 100%, hsla(191, 75%, 58%, 1) 100%);
     transform: skew(0, 10deg);
 }
-
+.section2Title{
+    text-align: center;
+}
 .infoHolder {
     width: 100%;
     justify-content: space-evenly;
@@ -113,7 +116,7 @@ h3 {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    height: 10vw;
+    height: 10rem;
     opacity: 0;
     transform: scale(.75);
     width: 20%;
@@ -123,9 +126,7 @@ h3 {
    box-shadow: 10px 10px #222;
    transition: 1s;
 }
-.infoBox p{
-    font-size: 1.5vw;
-}
+
 .infoBox1.active {
     opacity: 1;
     transition: 1s;
@@ -156,21 +157,7 @@ h3 {
     text-align: center;
     border-radius: 50%;
 }
-
-@media (max-width:600px) {
-
-    h1,
-    h3,
-    p,
-    span {
-        font-size: 50px;
-    }
-
-    h2,
-    a {
-        font-size: 30px;
-    }
-
+@media (max-width:1200px) {
     .section1 {
         justify-content: space-evenly;
         align-items: center;
@@ -187,12 +174,26 @@ h3 {
         flex: 0;
         margin: 0;
     }
+    
+}
+
+@media (max-width:600px) {
+    .mainBox h1{
+        font-size:4rem;
+    }
+    .mainBox h2{
+        font-size:2rem;
+    }
+    .mainBox h3{
+        font-size:2rem;
+    }
     .section2{
         text-align: center;
     }
     .infoHolder{
         flex-direction: column;
-        align-items: center;
+        align-items:center;
+        justify-content: space-between;
     }
     .infoBox p,.infoBox h2,.infoBox a{
         font-size: 10px;

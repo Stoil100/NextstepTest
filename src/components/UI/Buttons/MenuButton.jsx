@@ -1,41 +1,61 @@
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./MenuButton.module.css";
 
 import homeIcon from "../../../assets/home.svg";
 import plusIcon from "../../../assets/plus.svg";
 import profileIcon from "../../../assets/profile.svg";
 import settingsIcon from "../../../assets/settings.svg";
+import newsIcon from "../../../assets/news.svg";
 import logoutIcon from "../../../assets/logout.svg";
+import searchIcon from "../../../assets/search.svg"
 import AuthContext from "../../store/auth-context";
 
-
 export const MenuButton = () => {
-  const ctx=useContext(AuthContext);
+  const ctx = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const logoutHandler =()=>{
+  const logoutHandler = () => {
     ctx.onLogout();
-    const sendApiData={username:`${ctx.enteredUsername}`,email:`${ctx.enteredEmail}`,password:`${ctx.enteredPassword}`}
-  getApiResponse(sendApiData)
-  }
+    const sendApiData = {
+      username: `${ctx.enteredUsername}`,
+      email: `${ctx.enteredEmail}`,
+      password: `${ctx.enteredPassword}`,
+    };
+    getApiResponse(sendApiData);
+    navigate("/login");
+  };
+  const profileHandler = () => {
+    navigate("/profile");
+  };
+  const newsHandler = () => {
+    navigate("/news");
+  };
+  const articlesHandler = () => {
+    navigate("/courses");
+  };
+  const searchHandler = () => {
+    navigate("/charts");
+  };
 
-  let getApiResponse = async (propsData) => {
-    console.log(propsData);
-    let response = await fetch("http://127.0.0.1:8000/accounts/logout/",{
-      method:'POST',
-      headers:{
-      'Content-Type': 'application/json',
-    },
-      body:JSON.stringify(propsData),
+  let getApiResponse = async (props) => {
+    console.log(props);
+    let response = await fetch("http://127.0.0.1:8000/accounts/logout/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(props),
     })
-    .then((response)=>response.json())
-    .then((data)=>{
-      console.log("Success",data)
-    })
-    .catch((error)=>{
-      console.error("Error:",error);
-    })
-    let data = await response.json();  
+      .then((response) => response.json())
+      .then((data) => {
+        localStorage.removeItem("key");
+        console.log("Success", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -45,25 +65,29 @@ export const MenuButton = () => {
           setIsOpen(!isOpen);
         }}
       >
-        <img src={plusIcon} alt="menu"/>
+        <img src={plusIcon} alt="menu" />
       </button>
       <div className={styles.menu}>
-        <button>
-        <img src={profileIcon} alt="profile"/>
-          <span>Profile</span>
+        <button onClick={searchHandler}>
+          <img src={searchIcon} alt="profile" />
+          <span>Charts</span>
         </button>
-        <button>
-        <img src={homeIcon} alt="home"/>
-          <span>Home</span>
+        <button onClick={profileHandler}>
+          <img src={profileIcon} alt="profile" />
+          <span>Профил</span>
         </button>
-        <button>
-          <img src={settingsIcon} alt="settings"/>
-          <span>Settings</span>
+        <button onClick={articlesHandler}>
+          <img src={homeIcon} alt="home" />
+          <span>Курсове</span>
         </button>
-      {ctx.isLoggedIn&&<button onClick={logoutHandler}>
-        <img src={logoutIcon} alt="log out"/>
-          <span>Log out</span>
-        </button>}
+        <button onClick={newsHandler}>
+          <img src={newsIcon} alt="news" />
+          <span>Новини</span>
+        </button>
+        <button onClick={logoutHandler}>
+          <img src={logoutIcon} alt="log out" />
+          <span>Изход</span>
+        </button>
       </div>
     </div>
   );

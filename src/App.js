@@ -1,4 +1,6 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
+import { createBrowserRouter, Router, RouterProvider } from "react-router-dom";
+
 
 import styles from "./App.module.css";
 
@@ -14,18 +16,44 @@ import Footer from "./components/Footer/Footer";
 //import Blob from "./components/UI/Blobs/Blob";
 import MainPage from "./components/MainPage/Main";
 import AuthContext from "./components/store/auth-context";
+import Test from "./components/Test/TestList/Test";
+import News from "./components/News/NewsMain/News";
+import Loader from "./components/UI/Loader/Loader";
+import RootLayout from "./components/Root/Root";
+import Course from "./components/Courses/Course/Course";
+import ErrorPage from "./components/UI/Errors/ErrorPage";
+import CourseItem from "./components/Courses/CourseItems/CourseItem";
+import Chart from "./components/Charts/Chart";
+import TradingViewWidget from "./components/Charts/TradingViewChart";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    errorElement:<ErrorPage/>,
+    children: [
+      { path: "/", element: <MainPage /> },
+      { path: "/signup", element: <SignUp /> },
+      { path: "/login", element: <Login /> },
+      { path: "/profile", element: <Profile /> },
+      { path: "/news", element: <News /> },
+      { path: "/entryTest", element: <Test /> },
+      { path:"/courses", element:<Course/>},
+      { path:"/courses/:courseId",element:<CourseItem/>},
+      {path:"/charts",element:<Chart/>},
+      {path:"/charts/:chartId",element:<TradingViewWidget/>},
+    ],
+  },
+]);
+
 function App() {
-  const ctx=useContext(AuthContext);
+  const ctx = useContext(AuthContext);
   return (
     <>
-    <Card className={styles.Box}>
-      <Nav/>
-      
-      {!ctx.isLoggedIn && <Login/>}
-        {ctx.isLoggedIn && <Profile />}
-      <MenuButton/>
-    </Card>
-    <Footer/>
+      <Card className={styles.Box}>
+        <RouterProvider router={router} />
+      </Card>
+      <Footer />
     </>
   );
 }

@@ -1,7 +1,7 @@
 
   .fab {
     position: fixed;
-    right: 30px;
+    right: 48px;
     bottom: 38px;
     border-radius: 50%;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -28,11 +28,7 @@
     color: #f9f9f9;
     transition: 0.2s;
   }
-  
-  .fab > button > i {
-    font-size: 32px;
-  }
-  
+
   .menu {
     position: absolute;
     bottom: 76px;

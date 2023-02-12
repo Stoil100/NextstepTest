@@ -2,14 +2,17 @@ body{
    background-color: #222;
    overflow-x: hidden;
 }
-h2{
-   font-size:3vw;
+body::-webkit-scrollbar{
+   background-color: transparent;
 }
-p,a{
-   font-size:1.5vw;
+body::-webkit-scrollbar-thumb{
+   background-image: linear-gradient(to right, #0c87c9 0%, #0776b3 100%);
+   border-radius:10px ;
 }
 a{
    cursor: pointer;
+   text-decoration: none;
+   color:#fff;
 }
 img{
   height:50%;
@@ -20,7 +23,9 @@ input{
 .Box{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    padding-top:10vh ;
+    padding-bottom:5vh ;
     min-height: 100vh;
 }
