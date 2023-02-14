@@ -157,6 +157,9 @@
     text-align: center;
     border-radius: 50%;
 }
+.mainQuote{
+    text-align: left;
+}
 @media (max-width:1200px) {
     .section1 {
         justify-content: space-evenly;
@@ -178,6 +181,18 @@
 }
 
 @media (max-width:600px) {
+    .section1Title{
+        font-size:2rem !important;
+    }
+    .infoBox{
+        width: 40%;
+        height: 7rem;
+
+    }
+    .infoBox.active{
+        margin: 10px;
+        transform: translateY(0%);
+    }
     .mainBox h1{
         font-size:4rem;
     }

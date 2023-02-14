@@ -55,9 +55,6 @@ const SignUp = (props) => {
   };
   const sendApiResponse = (props) => {
     if (props === true) {
-      ctx.setUsrnmValue(enteredUsername);
-      ctx.setEmlValue(enteredEmail);
-      ctx.setPswrdValue(enteredPassword);
       ctx.onLogin(enteredEmail, enteredPassword, enteredUsername);
       navigate('/profile');
     } else {
@@ -97,8 +94,6 @@ const SignUp = (props) => {
         if (data.access !== undefined) {
           localStorage.setItem("access token",data.access);
           localStorage.setItem("refresh token",data.refresh);
-          const decoded=jwt(data.access);
-          console.log(decoded)
           sendApiResponse(true);
         } else {
           sendApiResponse(false);

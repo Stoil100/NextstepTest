@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { createBrowserRouter, Router, RouterProvider } from "react-router-dom";
 
 
@@ -47,7 +47,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const [isLoading,setIsLoading]=useState(true);
   const ctx = useContext(AuthContext);
+
   return (
     <>
       <Card className={styles.Box}>

@@ -9,7 +9,7 @@
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    background-color: #081d2f;
+    background-color: #222;
     padding: 10px;
     gap:10px;
 }
@@ -35,7 +35,7 @@
     align-items: center;
 }
 .madeByHolder{
-    background-color: #232c69;
+    background-color: #333;
     color: #fff;
     justify-content: center;
     gap:10px;

@@ -1,90 +1,142 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Card from "../UI/Cards/Card";
 import styles from "./Chart.module.css";
 import TradingViewWidget from "./TradingViewChart";
-
-const CHART_SYMBOLS = [
-  { id: 1, symbol: "BTCUSDT" },
-  { id: 2, symbol: "ETHUSDT" },
-  { id: 3, symbol: "XRPUSDT" },
-  { id: 4, symbol: "LTCUSDT" },
-  { id: 5, symbol: "BCHUSDT" },
-  { id: 6, symbol: "EOSUSDT" },
-  { id: 7, symbol: "BNBUSDT" },
-  { id: 8, symbol: "ADAUSDT" },
-  { id: 9, symbol: "XLMUSDT" },
-  { id: 10, symbol: "TRXUSDT" },
-  { id: 11, symbol: "USDTUSDT" },
-  { id: 12, symbol: "DOGEUSDT" },
-  { id: 13, symbol: "DASHUSDT" },
-  { id: 14, symbol: "BSVUSDT" },
-  { id: 15, symbol: "LINKUSDT" },
-  { id: 16, symbol: "NEOUSDT" },
-  { id: 17, symbol: "XMRUSDT" },
-  { id: 18, symbol: "ATOMUSDT" },
-  { id: 19, symbol: "CROUSDT" },
-  { id: 20, symbol: "XTZUSDT" },
-  { id: 21, symbol: "AAPL" },
-  { id: 22, symbol: "GOOG" },
-  { id: 23, symbol: "TSLA" },
-  { id: 24, symbol: "MSFT" },
-  { id: 25, symbol: "AMZN" },
-  { id: 26, symbol: "FB" },
-  { id: 27, symbol: "BABA" },
-  { id: 28, symbol: "BRK.A" },
-  { id: 29, symbol: "JNJ" },
-  { id: 30, symbol: "V" },
-  { id: 31, symbol: "MA" },
-  { id: 32, symbol: "WMT" },
-  { id: 33, symbol: "PG" },
-  { id: 34, symbol: "JPM" },
-  { id: 35, symbol: "VZ" },
-  { id: 36, symbol: "T" },
-  { id: 37, symbol: "HD" },
-  { id: 38, symbol: "INTC" },
-  { id: 39, symbol: "PFE" },
-  { id: 40, symbol: "UNH" },
-  { id: 41, symbol: "EURUSD" },
-  { id: 42, symbol: "GBPUSD" },
-  { id: 43, symbol: "USDJPY" },
-  { id: 44, symbol: "USDCHF" },
-  { id: 45, symbol: "AUDUSD" },
-  { id: 46, symbol: "USDCAD" },
-  { id: 47, symbol: "NZDUSD" },
-  { id: 48, symbol: "EURGBP" },
-  { id: 49, symbol: "EURJPY" },
-  { id: 50, symbol: "GBPJPY" },
-  { id: 51, symbol: "AUDJPY" },
-  { id: 52, symbol: "CHFJPY" },
-  { id: 53, symbol: "EURAUD" },
-  { id: 54, symbol: "GBPAUD" },
-  { id: 55, symbol: "EURCAD" },
-  { id: 56, symbol: "GBPCAD" },
-  { id: 57, symbol: "EURCHF" },
-  { id: 58, symbol: "AUDCAD" },
-  { id: 59, symbol: "NZDCAD" },
-];
+import Axios from "axios";
+import Loader from "../UI/Loader/Loader";
 
 const Chart = () => {
-  const [filter, setFilter] = useState("");
+  const [prices, setPrices] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredItems = CHART_SYMBOLS.filter((item) =>
+  useEffect(() => {
+    const fetchData = async () => {
+      const symbols = [
+        "BTC",
+        "ETH",
+        "ADA",
+        "XRP",
+        "LTC",
+        "EOS",
+        "BNB",
+        "USDT",
+        "BCH",
+        "XLM",
+        "TRX",
+        "DOGE",
+        "DASH",
+        "BSV",
+        "LINK",
+        "NEO",
+        "XMR",
+        "ATOM",
+        "CRO",
+        "XTZ",
+        /*"AAPL",
+        "GOOG",
+        "TSLA",
+        "MSFT",
+        "AMZN",
+        "FB",
+        "BABA",
+        "BRK.A",
+        "JNJ",
+        "V",
+        "MA",
+        "WMT",
+        "PG",
+        "JPM",
+        "VZ",
+        "T",
+        "HD",
+        "INTC",
+        "PFE",
+        "UNH",
+        "EURUSD",
+        "GBPUSD",
+        "USDJPY",
+        "USDCHF",
+        "AUDUSD",
+        "USDCAD",
+        "NZDUSD",
+        "EURGBP",
+        "EURJPY",
+        "GBPJPY",
+        "AUDJPY",
+        "CHFJPY",
+        "EURAUD",
+        "GBPAUD",
+        "EURCAD",
+        "GBPCAD",
+        "EURCHF",
+        "AUDCAD",
+        "NZDCAD",*/
+      ];
+      const promises = symbols.map((symbol) =>
+        Axios.get(
+          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&symbols=${symbol}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h`
+        )
+      );
+      const results = await Promise.all(promises);
+      const prices = results.reduce((acc, result) => {
+        console.log(acc);
+        const symbol = result.data[0].symbol + "USDT";
+        const currentPrice = result.data[0].current_price;
+        const change =
+          result.data[0].market_cap_change_percentage_24h.toFixed(2);
+        const volume = result.data[0].total_volume;
+        const image = result.data[0].image;
+        acc[symbol] = { dailyChange: change, volume, image, currentPrice };
+        return acc;
+      }, {});
+      setPrices(prices);
+    };
+
+    fetchData();
+  }, []);
+
+  /*const filteredItems = CHART_SYMBOLS.filter((item) =>
     item.symbol.includes(filter.toUpperCase())
+  );*/
+  const symbols = Object.keys(prices).filter((symbol) =>
+    symbol.includes(searchTerm)
   );
+  const filteredPrices = symbols.reduce((acc, symbol) => {
+    acc[symbol] = prices[symbol];
+    return acc;
+  }, {});
   return (
     <>
-      <input
-        className={styles.searchInput}
-        onChange={(e) => setFilter(e.target.value)}
-      ></input>
-      <Card className={styles.chartItemsHolder}>
-        {filteredItems.map((item) => (
-          <Link to={`/charts/${item.symbol}`} key={item.id}>
-            Launch {item.symbol} chart
-          </Link>
-        ))}
-      </Card>
+    {filteredPrices.length===0 && <Loader/>}
+          <input
+            className={styles.searchInput}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          ></input>
+          <Card className={styles.chartItemsHolder}>
+            {Object.entries(filteredPrices).map(
+              ([symbol, { dailyChange, volume, image, currentPrice }]) => (
+                <Link
+                  to={`/charts/${symbol}`}
+                  key={symbol}
+                  className={styles.valueHolder}
+                >
+                  <img src={image}></img>
+                  <h2>{symbol.toUpperCase()}</h2>
+                  <h3>цена {currentPrice} USD</h3>
+                  <h4 className={styles.valueDescription}>
+                    обмен за деня: {volume}
+                  </h4>
+                  <h4 className={styles.valueDescription}>
+                    промяна за деня: {dailyChange}%
+                  </h4>
+                  <p className={styles.valueLink}>
+                    натиснете за да видите графиката
+                  </p>
+                </Link>
+              )
+            )}
+          </Card>
     </>
   );
 };

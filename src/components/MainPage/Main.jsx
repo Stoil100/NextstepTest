@@ -45,7 +45,7 @@ const MainPage = () => {
     <Card className={styles.mainBox}>
       <section className={`${styles.section} ${styles.section1}`}>
         <Card className={styles.section1Holder1}>
-          <h1>Каква е следващата стъпка в търговията?</h1>
+          <h1 className={styles.section1Title}>Каква е следващата стъпка в търговията?</h1>
           <h3>Ние ще ви помогнем да я направите!</h3>
         </Card>
         <Card className={styles.section1Holder2}>
@@ -95,7 +95,9 @@ const MainPage = () => {
           </div>
         </Card>
       </section>
-      <section className={`${styles.section} ${styles.section3}`}></section>
+      <section className={`${styles.section} ${styles.section3}`}>
+       
+      </section>
     </Card>
   );
 };
