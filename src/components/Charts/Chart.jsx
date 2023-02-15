@@ -108,7 +108,7 @@ const Chart = () => {
   }, {});
   return (
     <>
-    {filteredPrices.length===0 && <Loader/>}
+    {Object.keys(prices).length===0 && <Loader/>}
           <input
             className={styles.searchInput}
             onChange={(e) => setSearchTerm(e.target.value)}

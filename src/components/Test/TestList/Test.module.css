@@ -23,3 +23,9 @@ body{
 .prevQ:hover,.nextQ:hover{
     transform: scale(1.3);
 }
+
+@media (max-width:600px) {
+    .prevQ,.nextQ{
+        opacity: 0;
+    }
+}

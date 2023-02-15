@@ -63,14 +63,11 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: rgba(0, 162, 255, 0.08);
+    background: #088aee;
     color: #e0e0e0;
     transition: 0.3s;
   }
   
-  .menu > button:hover {
-    background: rgba(0, 200, 255, 0.16);
-  }
   
   .menu > button > span {
     position: absolute;

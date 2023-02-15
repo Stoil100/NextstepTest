@@ -36,10 +36,25 @@
     margin: 10px;
 }
 .valueHolder *{
+    padding:2px;
     color:black;
     margin: 5px;
+    border-bottom: 2px solid black;
+}
+.valueHolder img{
+    border:none;
 }
 .valueDescription{
     font-weight: 600;
+}
+@media (max-width:800px) {
+    .valueHolder{
+        height: 100%;
+        flex-wrap: wrap;
+    }
+    .valueHolder img{
+        height:20%;
+    }
+    
 }
 

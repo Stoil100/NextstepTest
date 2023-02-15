@@ -3,7 +3,6 @@ import Card from '../../UI/Cards/Card'
 import styles from './NewsItem.module.css'
 
 const NewsItem=(props)=>{
-    console.log(props)
     return(
         <Card className={styles.newsHolder}>
             <h3 className={styles.newsTitle}>{props.title}</h3>

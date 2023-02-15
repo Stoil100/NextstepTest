@@ -9,6 +9,9 @@ nav{
     position:fixed;
     z-index: 100;
 }
+.nextstepLogoLink{
+    height: 100%;
+}
 .nextstepLogo{
     height: 100%;
 }

@@ -96,7 +96,6 @@ const MainPage = () => {
         </Card>
       </section>
       <section className={`${styles.section} ${styles.section3}`}>
-       
       </section>
     </Card>
   );

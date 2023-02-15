@@ -11,7 +11,9 @@ const Nav = (props) => {
     <nav>
       <ul className={styles.navBar}>
         <li>
-          <img src={logo} alt="Nextstep" className={styles.nextstepLogo}/>
+          <Link to={"/"} className={styles.nextstepLogoLink}>
+            <img src={logo} alt="Nextstep" className={styles.nextstepLogo}/>
+          </Link>
         </li>
         <li>
           {!ctx.isLoggedIn?<Link to={'/login'}>Log in</Link>:<Link to={"/courses"}>Courses</Link>} 

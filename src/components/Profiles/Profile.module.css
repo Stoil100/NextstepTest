@@ -72,7 +72,7 @@ ol{
 
     --border-size: 3px;
     --border-angle: 0turn;
-    background-image: conic-gradient(#222, #222, #222), conic-gradient(from var(--border-angle), transparent 20%, rgb(0, 238, 255), rgb(6, 167, 179));
+    background-image: conic-gradient(#111522, #111522, #111522), conic-gradient(from var(--border-angle), transparent 20%, rgb(0, 238, 255), rgb(6, 167, 179));
     background-size: calc(100% - (var(--border-size) * 2)) calc(100% - (var(--border-size) * 2)), cover;
     background-position: center center;
     background-repeat: no-repeat;

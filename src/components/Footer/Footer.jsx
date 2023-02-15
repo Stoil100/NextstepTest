@@ -28,8 +28,7 @@ const Footer = () => {
           <p>Advanced</p>
         </Card>
         <Card className={styles.madeByHolder}>
-          <p>&copy; 2023/2024 NEXTSTEP - All Rights Reserved</p>
-          <p>/</p>
+          <p>&copy; 2023/2024 NEXTSTEP - All Rights Reserved /</p>
           <p>Made by Stoil</p>
         </Card>
       </Card>
