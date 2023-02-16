@@ -79,6 +79,9 @@
     font-size: 16px;
     transition: 0.5s;
     color:#fff;
+    background-color: #088aee;
+    padding: 4px;
+    border-radius: 10px;
   }
   
   .menu > button:hover > span {

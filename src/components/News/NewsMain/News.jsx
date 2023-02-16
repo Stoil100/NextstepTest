@@ -1,41 +1,60 @@
-import React,{ useState,useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import styles from './News.module.css'
+import React, { useState, useEffect } from "react";
+import styles from "./News.module.css";
 import Card from "../../UI/Cards/Card";
 import Loader from "../../UI/Loader/Loader";
 import NewsItem from "../NewsItem/NewsItem";
 
 const News = () => {
   const [list, setList] = useState([]);
+  const [giveApiData, setApiData] = useState("");
+  console.log(giveApiData);
 
-  const params = useParams();
-  console.log(params.newsId)
   useEffect(() => {
-     fetch('http://127.0.0.1:8000/news/crypto/')
-        .then((response) => response.json())
-        .then((data) => {
-           setList(data.results);
-        })
-        .catch((err) => {
-           console.log(err.message);
-        });
-  }, []);
+    setList([]);
+    fetch(`http://127.0.0.1:8000/news${giveApiData}/`)
+      .then((response) => response.json())
+      .then((data) => {
+        setList(data.results);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, [giveApiData]);
 
-  console.log(list)
+  const setNews = ["business", "crypto", "stocks", "forex"];
+  const reEvaluateApiData = (e) => {
+    console.log(e.target.value);
+    if (e.target.value === "business") {
+      setApiData("");
+    } else {
+      setApiData(`/${e.target.value}`);
+    }
+  };
 
   return (
     <>
-    {list.length === 0 && <Loader />}
-    <Card className={styles.newsBox}>
-      {list.length !== 0 &&
-        list.map((data) => (
-          <NewsItem
-            title={data.title}
-            description={data.description}
-            url={data.link}
-          />
-        ))}
-    </Card>
+      {list.length === 0 && <Loader />}
+      <Card className={styles.newsBox}>
+        <div className={styles.newsButtonsHolder}>
+          {setNews.map((item) => (
+            <button
+              value={item}
+              onClick={reEvaluateApiData}
+              className={styles.newsButttons}
+            >
+              {item.toUpperCase()} NEWS
+            </button>
+          ))}
+        </div>
+        {list.length !== 0 &&
+          list.map((data) => (
+            <NewsItem
+              title={data.title}
+              description={data.description}
+              url={data.link}
+            />
+          ))}
+      </Card>
     </>
   );
 };

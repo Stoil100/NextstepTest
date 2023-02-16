@@ -112,6 +112,7 @@ const Chart = () => {
           <input
             className={styles.searchInput}
             onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder={"Напишете символа на валутата която търсите"}
           ></input>
           <Card className={styles.chartItemsHolder}>
             {Object.entries(filteredPrices).map(
