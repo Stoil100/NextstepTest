@@ -16,7 +16,7 @@ const Test = (props) => {
   let counter = 1;
   let [list, setList] = useState([]);
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/knowledge_quiz/quiz/")
+    fetch("https://nextstep-trading-backend.herokuapp.com/knowledge_quiz/quiz/")
       .then((response) => response.json())
       .then((data) => {
         data.map((item) => {
