@@ -52,7 +52,6 @@ const SignUp = (props) => {
       localStorage.setItem("pointsValue", 0);
       getApiResponse(sendApiData);
       ctx.onLogin(enteredEmail, enteredPassword, enteredUsername);
-      navigate("/profile");
 
       return;
     }
@@ -112,6 +111,7 @@ const SignUp = (props) => {
         console.log(data)
         localStorage.setItem("access token",data.access);
         localStorage.setItem("refresh token",data.refresh);
+        navigate("/profile");
       })
       .catch((error) => {
         console.error("Error:", error);

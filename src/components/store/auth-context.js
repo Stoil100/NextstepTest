@@ -13,10 +13,9 @@ export const AuthContextProvider = (props) => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [pointsValue, setPointsValue] = useState("");
-    const accessToken=localStorage.getItem("access token");
 
   useEffect(() => {
-    
+    const accessToken=localStorage.getItem("access token");
   const storedLoggedIn = localStorage.getItem("isLoggedIn");
     console.log(accessToken)
     if (storedLoggedIn === "1") {
@@ -28,7 +27,7 @@ export const AuthContextProvider = (props) => {
       setUsernameValue(decoded.username);
       setEmailValue(decoded.email)
     }
-  }, [accessToken]);
+  }, []);
 
   const logoutHandler = () => {
     localStorage.removeItem("isLoggedIn");

@@ -1,30 +1,49 @@
-import React from "react";
+import React,{useContext,useState,useEffect} from "react";
+import jwtDecode from "jwt-decode";
 
 import styles from "./Profile.module.css";
 import Card from "../UI/Cards/Card";
 import personIcon from '../../assets/person.svg';
-import { useContext } from "react";
+
 import AuthContext from "../store/auth-context";
+import Loader from "../UI/Loader/Loader";
 
 const Profile = (props) => {
-  const ctx=useContext(AuthContext);
+  const [profile, setProfile] = useState(null);
 
-  console.log(ctx)
+  useEffect(() => {
+    // Get the JWT token from local storage
+    const token = localStorage.getItem('access token');
+
+    // If the token exists, decode it to get the user's profile information
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      console.log(decodedToken)
+      setProfile({
+        name: decodedToken.username,
+        email: decodedToken.email,
+      });
+    }
+  }, []);
+
+  if (!profile) {
+    return <Loader/>;
+  }
   return (
     <Card className={styles.profileBox}>
       <Card className={`${styles.box1} `}>
         <div className={styles.imageAndUsernameHolder}>
           <img src={personIcon} className={styles.profileImg} alt="profileImg"></img>
-          <h2>{ctx.usernameValue}</h2>
+          <h2>{profile.name}</h2>
         </div>
         <hr></hr>
         <div className={styles.infoHolder}>
             <h3>Емeйл:</h3>
-            <h4>{ctx.emailValue}</h4>
+            <h4>{profile.email}</h4>
         </div>
         <div className={styles.infoHolder}>
             <h3>NXST точки:</h3>
-            <h4>{ctx.pointsValue}</h4>
+            <h4>{profile.pointsValue}</h4>
         </div>
       </Card>
       <Card className={`${styles.levelBox} `}>

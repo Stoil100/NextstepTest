@@ -50,7 +50,8 @@ export const MenuButton = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        localStorage.removeItem("key");
+        localStorage.removeItem("access key");
+        localStorage.removeItem("refresh key");
         console.log("Success", data);
       })
       .catch((error) => {
