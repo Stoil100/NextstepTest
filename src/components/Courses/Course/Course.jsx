@@ -9,7 +9,7 @@ import CourseItem from "../CourseItems/CourseItem";
 const Course = () => {
   const [list, setList] = useState([]);
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/courses/article/")
+    fetch("https://nextstep-trading-backend.herokuapp.com/courses/article/")
       .then((response) => response.json())
       .then((data) => {
         setList(data);

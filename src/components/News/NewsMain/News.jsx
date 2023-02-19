@@ -11,7 +11,7 @@ const News = () => {
 
   useEffect(() => {
     setList([]);
-    fetch(`http://127.0.0.1:8000/news${giveApiData}/`)
+    fetch(`https://nextstep-trading-backend.herokuapp.com/news${giveApiData}/`)
       .then((response) => response.json())
       .then((data) => {
         setList(data.results);

@@ -41,7 +41,7 @@ export const MenuButton = () => {
 
   let getApiResponse = async (props) => {
     console.log(props);
-    let response = await fetch("http://127.0.0.1:8000/accounts/logout/", {
+    let response = await fetch("https://nextstep-trading-backend.herokuapp.com/accounts/logout/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

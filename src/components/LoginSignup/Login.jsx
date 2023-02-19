@@ -81,7 +81,7 @@ const SignUp = (props) => {
   };
 
   const getApiResponse = async (props) => {
-    const response = await fetch("http://127.0.0.1:8000/accounts/token/", {
+    const response = await fetch("https://nextstep-trading-backend.herokuapp.com/accounts/token/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

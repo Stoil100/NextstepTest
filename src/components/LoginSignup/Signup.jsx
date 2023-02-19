@@ -82,7 +82,7 @@ const SignUp = (props) => {
 
   let getApiResponse = async (props) => {
     console.log(props);
-    let response = await fetch("http://127.0.0.1:8000/accounts/users/", {
+    let response = await fetch("https://nextstep-trading-backend.herokuapp.com/accounts/users/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +100,7 @@ const SignUp = (props) => {
   };
   const getApiKey = async (props) => {
     console.log(props)
-    const response = await fetch("http://127.0.0.1:8000/accounts/token/", {
+    const response = await fetch("https://nextstep-trading-backend.herokuapp.com/accounts/token/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
