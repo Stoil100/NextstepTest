@@ -122,7 +122,7 @@ const Chart = () => {
                   key={symbol}
                   className={styles.valueHolder}
                 >
-                  <img src={image}></img>
+                  <img src={image} alt={`${symbol} icon`}></img>
                   <h2>{symbol.toUpperCase()}</h2>
                   <h3>цена {currentPrice} USD</h3>
                   <h4 className={styles.valueDescription}>

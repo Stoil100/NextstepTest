@@ -1,63 +1,74 @@
-.footer{
+.footer {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
 }
-.footerItemsHolder{
+
+.footerItemsHolder {
     border-radius: 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    background-color: #222;
+    background-color: #192445;
     padding: 10px;
-    gap:10px;
+    gap: 10px;
 }
-.contactHolder{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color:#fff;
+
+.madeByHolder {
+    background-color: #FFDE59;
+    color: black;
     text-align: center;
-}
-.newsHolder{
-    flex-direction: column;
-    justify-content: space-around;
-    color: #fff;
-    align-items: center;
-    
-}
-.coursesHolder{
-    flex-direction: column;
-    justify-content: space-around;
-    color: #fff;
-    align-items: center;
-}
-.madeByHolder{
-    background-color: #333;
-    color: #fff;
     justify-content: center;
-    gap:10px;
+    flex-wrap: wrap;
+    gap: 10px;
     width: 100%;
     border-radius: 3px;
 }
-.contacts{
+
+.footerCompanyLogoBox {
+    text-align: center;
+    color: #fff;
+    height: 200px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-evenly;
-    border:2px solid rgb(0, 191, 255);
-    background-color: rgba(22, 27, 64, 0.55);
-    border-radius: 5px;
-    text-decoration: none;
-    color:#fff;
-    padding: 2px;
-    transition: 0.2s;
-    width: 80%;
 }
-.contacts:hover{
-    background-color: rgba(22, 27, 64, 1);
+
+.footerContactsBox {
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15%;
 }
-.contacts img{
-    width: 15%;
+.footerContactsIconsBox{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.footerContactsLink {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.footerContactsLink span {
+    color: #fff;
+}
+@media (max-width:1000px) {
+    .footerItemsHolder {
+        justify-content: center;
+    }
+    .footerContactsBox {
+        margin: 0;
+    }
+}
+@media (max-width:500px) {
+    .footerCompanyLogoBox img{
+        height: 50px;
+    }
 }

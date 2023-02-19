@@ -106,9 +106,11 @@
     text-align: center;
 }
 .infoHolder {
+    height: 100%;
     width: 100%;
     justify-content: space-evenly;
-    
+    align-items: center;
+    padding: 20px;
 }
 
 .infoBox {
@@ -117,32 +119,28 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    height: 10rem;
+    height: 12.5rem;
     opacity: 0;
     transform: scale(.75);
     width: 20%;
     padding: 10px;
-    border: 2px solid #222;
-    border-radius: 5px;
-   box-shadow: 10px 10px #222;
    transition: 1s;
+   border: 2px solid #121521;
+   border-radius: 5px;
+  box-shadow: 10px 10px #121521;
 }
-
-.infoBox1.active {
-    opacity: 1;
-    transition: 1s;
-    transform: translateY(-150%) scale(1);
-  }
-.infoBox2.active {
+.infoBox.active{
     opacity: 1;
     transition: 2s;
-    transform: translateY(-75%) scale(1);
-  }
-.infoBox3.active {
-    opacity: 1;
-    transition: 2.2s;
-    transform: translateY(0%) scale(1);
-  }
+    transform:  scale(1);
+}
+.infoBox1{
+    align-self: flex-start;
+}
+.infoBox3{
+    align-self: flex-end;
+}
+
 .infoBox3 a{
     border: 10px solid rgba(22, 27, 64, 0.1);
     background-color: rgba(22, 27, 64, 0.1);
@@ -192,6 +190,8 @@
         font-size:1.2rem !important;
     }
     .infoBox{
+        justify-self: center;
+        align-self: center;
         width: 40%;
         height: 7rem;
 

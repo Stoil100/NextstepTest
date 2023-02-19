@@ -26,7 +26,7 @@ li{
 ul{
     width: 100vw;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 .navItems{
@@ -38,15 +38,10 @@ ul{
     background-color: #fff;
 }
 @media (max-width:600px) {
-    .nextstepLogo{
-        height: 50%;
-    }
     ul{
         flex-direction: column;
         padding: 10px;
     }
 }
-@media (max-width:300px) {
 
-}
 

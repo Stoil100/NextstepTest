@@ -70,7 +70,7 @@ export const MenuButton = () => {
       <div className={styles.menu}>
         <button onClick={searchHandler}>
           <img src={searchIcon} alt="profile" />
-          <span>Charts</span>
+          <span>Диаграми</span>
         </button>
         <button onClick={profileHandler}>
           <img src={profileIcon} alt="profile" />

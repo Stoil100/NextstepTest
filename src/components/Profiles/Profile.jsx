@@ -34,7 +34,6 @@ const Profile = (props) => {
       <Card className={`${styles.box2} `}>
         <h2>Изгледани курсове:</h2>
         <ol>
-          <li>Курс за начинаещи</li>
         </ol>
       </Card>
     </Card>

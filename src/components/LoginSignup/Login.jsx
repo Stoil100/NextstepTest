@@ -27,15 +27,15 @@ const SignUp = (props) => {
       enteredUsername.trim().length <= 3
     ) {
       setErorr({
-        title: "Invalid input!",
-        message: "Please enter a valid username, email and password.",
+        title: "Невалидни данни!",
+        message: "Моля въведете правилно име, емейл и парола.",
       });
       return;
     }
     if (enteredPassword.length < 8) {
       setErorr({
-        title: "Invalid Password!",
-        message: "Password should be at least 8 characters.",
+        title: "Невалидна парола!",
+        message: "Паролата трябва да е поне 8 символа.",
       });
       return;
     } else {
@@ -59,8 +59,8 @@ const SignUp = (props) => {
       navigate('/profile');
     } else {
       setErorr({
-        title: "User does not exist!",
-        message: "Please try again.",
+        title: "Профилът не съществува!",
+        message: "Моля опитайте отново.",
       });
     }
     return;

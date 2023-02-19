@@ -26,22 +26,22 @@ const SignUp = (props) => {
       enteredUsername.trim().length <= 3
     ) {
       setErorr({
-        title: "Invalid input!",
-        message: "Please enter a valid username, email and password.",
+        title: "Невалидни данни!",
+        message: "Моля въведете правилно име, емейл и парола.",
       });
       return;
     }
     if (enteredPassword.length < 8) {
       setErorr({
-        title: "Invalid Password!",
-        message: "Password should be at least 8 characters.",
+        title: "Невалидна парола!",
+        message: "Паролата трябва да е поне 8 символа.",
       });
       return;
     }
     if (enteredPassword !== enteredConfirmPassword) {
       setErorr({
-        title: "Password does not match!",
-        message: "Password should match confirmation.",
+        title: "Паролите не са едни и същи!",
+        message: "Моля потвърдете че сте въвели правилна парола.",
       });
     } else {
       const sendApiData = {
@@ -51,10 +51,6 @@ const SignUp = (props) => {
       };
       localStorage.setItem("pointsValue", 0);
       getApiResponse(sendApiData);
-      getApiKey(sendApiData);
-      ctx.setUsrnmValue(enteredUsername);
-      ctx.setEmlValue(enteredEmail);
-      ctx.setPswrdValue(enteredPassword);
       ctx.onLogin(enteredEmail, enteredPassword, enteredUsername);
       navigate("/profile");
 
@@ -96,13 +92,15 @@ const SignUp = (props) => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success", data);
+        getApiKey(props);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
   const getApiKey = async (props) => {
-    const response = await fetch("http://127.0.0.1:8000/accounts/auth/", {
+    console.log(props)
+    const response = await fetch("http://127.0.0.1:8000/accounts/token/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -112,9 +110,8 @@ const SignUp = (props) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
-        if (data.token !== undefined) {
-          localStorage.setItem("key",data.token)
-        }
+        localStorage.setItem("access token",data.access);
+        localStorage.setItem("refresh token",data.refresh);
       })
       .catch((error) => {
         console.error("Error:", error);

@@ -19,6 +19,7 @@ img{
 }
 input{
    padding: 2px;
+   color:#000;
 }
 .Box{
     display: flex;
