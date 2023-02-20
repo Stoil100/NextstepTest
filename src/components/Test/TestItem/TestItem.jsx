@@ -3,9 +3,6 @@ import styles from "./TestItem.module.css";
 import Card from "../../UI/Cards/Card";
 
 const TestItem = (props) => {
-  console.log(props);
-  console.log("I was rendered")
-
   const checkFormData = (e) => {
     var labels=document.querySelectorAll('label');
     labels.forEach((label) => {
