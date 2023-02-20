@@ -22,6 +22,7 @@ const Profile = (props) => {
       setProfile({
         name: decodedToken.username,
         email: decodedToken.email,
+        points: localStorage.getItem("pointsValue")
       });
     }
   }, []);
@@ -43,7 +44,7 @@ const Profile = (props) => {
         </div>
         <div className={styles.infoHolder}>
             <h3>NXST точки:</h3>
-            <h4>{profile.pointsValue}</h4>
+            <h4>{profile.points}</h4>
         </div>
       </Card>
       <Card className={`${styles.levelBox} `}>

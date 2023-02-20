@@ -1,13 +1,12 @@
 import React, { useState, useContext } from "react";
-import { Link,useNavigate } from "react-router-dom";
-import jwt from 'jwt-decode';
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./SignUp.module.css";
 
 import Card from "../UI/Cards/Card";
 import Button from "../UI/Buttons/LoginButton";
 import ErrorModal from "../UI/Errors/ErrorModal";
-import MainPage from "../MainPage/Main";
+import Loader from "../UI/Loader/Loader";
 import AuthContext from "../store/auth-context";
 
 const SignUp = (props) => {
@@ -15,9 +14,9 @@ const SignUp = (props) => {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredUsername, setEnteredUsername] = useState("");
-  const [error, setErorr] = useState(); 
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setErorr] = useState();
   const navigate = useNavigate();
-
 
   const submitUserData = (e) => {
     e.preventDefault();
@@ -44,19 +43,16 @@ const SignUp = (props) => {
         email: `${enteredEmail}`,
         password: `${enteredPassword}`,
       };
+      setIsLoading(true);
       getApiResponse(sendApiData);
-      
+
       return;
     }
-    props.onAddUser(enteredEmail, enteredPassword, enteredUsername);
-    setEnteredEmail("");
-    setEnteredPassword("");
-    setEnteredUsername("");
   };
   const sendApiResponse = (props) => {
     if (props === true) {
       ctx.onLogin(enteredEmail, enteredPassword, enteredUsername);
-      navigate('/profile');
+      navigate("/profile");
     } else {
       setErorr({
         title: "Профилът не съществува!",
@@ -81,19 +77,22 @@ const SignUp = (props) => {
   };
 
   const getApiResponse = async (props) => {
-    const response = await fetch("https://nextstep-trading-backend.herokuapp.com/accounts/token/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(props),
-    })
+    const response = await fetch(
+      "https://nextstep-trading-backend.herokuapp.com/accounts/token/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(props),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         if (data.access !== undefined) {
-          localStorage.setItem("access token",data.access);
-          localStorage.setItem("refresh token",data.refresh);
+          localStorage.setItem("access token", data.access);
+          localStorage.setItem("refresh token", data.refresh);
           sendApiResponse(true);
         } else {
           sendApiResponse(false);
@@ -105,37 +104,45 @@ const SignUp = (props) => {
   };
 
   return (
-    <Card className={styles.signUpBox}>
-      {error && (
-        <ErrorModal
-          title={error.title}
-          message={error.message}
-          onConfirm={errorHandler}
-        />
-      )}
-      <form className={styles.form} onSubmit={submitUserData}>
-        <h2>Вход</h2>
-        <input
-          type="text"
-          placeholder="Име"
-          onChange={usernameChangeHandler}
-        />
-        <input type="email" placeholder="Емейл" onChange={emailChangeHandler} />
-        <input
-          type="password"
-          placeholder="Парола"
-          onChange={passwordChangeHandler}
-        />
-        <Button className={`${styles.signUpButton} ${styles.buttons}`}>
-         Влез
-        </Button>
-        <p>
-          Нямате профил?{" "}
-          <Link to={"/signup"}>
-            <span>Регистрирайте се</span>
-          </Link>
-        </p>
-       {/* <Card className={styles.orUseBox}>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Card className={styles.signUpBox}>
+          {error && (
+            <ErrorModal
+              title={error.title}
+              message={error.message}
+              onConfirm={errorHandler}
+            />
+          )}
+          <form className={styles.form} onSubmit={submitUserData}>
+            <h2>Вход</h2>
+            <input
+              type="text"
+              placeholder="Име"
+              onChange={usernameChangeHandler}
+            />
+            <input
+              type="email"
+              placeholder="Емейл"
+              onChange={emailChangeHandler}
+            />
+            <input
+              type="password"
+              placeholder="Парола"
+              onChange={passwordChangeHandler}
+            />
+            <Button className={`${styles.signUpButton} ${styles.buttons}`}>
+              Влез
+            </Button>
+            <p>
+              Нямате профил?{" "}
+              <Link to={"/signup"}>
+                <span>Регистрирайте се</span>
+              </Link>
+            </p>
+            {/* <Card className={styles.orUseBox}>
           <hr></hr>
           <p>Or</p>
           <hr></hr>
@@ -143,8 +150,10 @@ const SignUp = (props) => {
         <Button className={`${styles.googleButton} ${styles.buttons}`}>
           Log in with Google
         </Button>*/}
-      </form>
-    </Card>
+          </form>
+        </Card>
+      )}
+    </>
   );
 };
 

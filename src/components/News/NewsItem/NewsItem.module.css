@@ -1,9 +1,9 @@
 .newsHolder{
     width:fit-content;
-    max-width: 600px;
+    max-width: 60rem;
     height: fit-content;
-    max-height: 22vh ;
-    padding:10px ;
+    max-height:40vh;
+    padding:10px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -14,16 +14,10 @@
 }
 .newsHolder::-webkit-scrollbar{
     background-color: transparent;
-    /*background-color: rgb(44, 44, 44);
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;*/
 }
 
 .newsHolder::-webkit-scrollbar-thumb{
-    background-color: transparent;
-    /*background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-    border-radius: 10px;*/
-    
+    background-color: transparent;    
 }
 .newsHolder a{
     width: 100%;
