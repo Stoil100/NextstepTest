@@ -34,13 +34,13 @@ const Test = (props) => {
 
   const checkValue = (value, id) => {
     console.log(value, id);
-    console.log(list);
-    if (list.at(id - 8).rightAnswer === value) {
-      list.at(id - 8).choice = true;
+    console.log(list.at(0).id);
+    if (list.at(id - list.at(0).id).rightAnswer === value) {
+      list.at(id - list.at(0).id).choice = true;
     } else {
-      list.at(id - 8).choice = false;
+      list.at(id - list.at(0).id).choice = false;
     }
-    console.log(list.at(id - 8).choice);
+    console.log(list.at(id - list.at(0).id).choice);
   };
   const prevBtnClicked = () => {
     if (counter !== 0) {

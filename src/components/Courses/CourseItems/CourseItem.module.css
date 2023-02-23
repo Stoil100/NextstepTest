@@ -26,9 +26,11 @@
 .courseDescription{
     margin-top: 10px;
     font-size: 20px;
+    background-color: rgba(0, 0, 0, 0.295);
 }
 .courseTitle{
     color:#fff;
+    text-align: center;
 }
 .testAnchor{
     padding: 5px;

@@ -1,11 +1,9 @@
 .mainBox {
     display: grid;
     grid-template-columns: repeat(1, 100vw);
-    grid-template-rows: repeat(2, 100vh) 40vh;
-    color: #fff
+    grid-template-rows: repeat(2, 100vh);
+    color: #fff;
 }
-
-
 .mainBox h1{
     font-size:5rem;
 }
@@ -15,6 +13,7 @@
 .mainBox h3{
     font-size:2rem;
 }
+
 .section1 {
     display: flex;
     justify-content: space-around;
@@ -54,7 +53,7 @@
     width: 50%;
     height: 80px;
     font-size: 1.5rem;
-    border: 1px solid rgb(0, 179, 255);
+    border: 5px solid rgb(0, 149, 212);
     border-radius: 10px;
 }
 
@@ -94,20 +93,19 @@
 
 .section2 {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
-    background: hsla(226, 42%, 37%, 1);
-
+    background-color: transparent;
+    /*background: hsla(226, 42%, 37%, 1);
     background: linear-gradient(270deg, hsla(226, 42%, 37%, 1) 0%, hsla(190, 79%, 59%, 1) 100%, hsla(191, 75%, 58%, 1) 100%);
-    transform: skew(0, 10deg);
-}
+*/}
 .section2Title{
     text-align: center;
 }
 .infoHolder {
-    height: 100%;
-    width: 100%;
+    border: 0px solid;
+    height: 70vh;
     justify-content: space-evenly;
     align-items: center;
     padding: 20px;
@@ -119,19 +117,20 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    height: 12.5rem;
+    height: 80%;
     opacity: 0;
     transform: scale(.75);
-    width: 20%;
+    width: 25%;
     padding: 10px;
    transition: 1s;
-   border: 2px solid #121521;
-   border-radius: 5px;
-  box-shadow: 10px 10px #121521;
+   border: 2px solid #FFDE59;
+   border-radius: 10px;
+  box-shadow: 10px 10px #FFDE59;
 }
+
 .infoBox.active{
     opacity: 1;
-    transition: 2s;
+    transition: 1s;
     transform:  scale(1);
 }
 .infoBox1{
@@ -140,7 +139,6 @@
 .infoBox3{
     align-self: flex-end;
 }
-
 .infoBox3 a{
     border: 10px solid rgba(22, 27, 64, 0.1);
     background-color: rgba(22, 27, 64, 0.1);
@@ -156,9 +154,7 @@
     text-align: center;
     border-radius: 50%;
 }
-.mainQuote{
-    text-align: left;
-}
+
 @media (max-width:1200px) {
     .section1 {
         justify-content: space-evenly;
