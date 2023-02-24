@@ -31,13 +31,15 @@ const Course = () => {
             <Link
               to={`/courses/:course${data.id}`}
               state={{
-               data: data
+                data: data,
               }}
               className={styles.courseItem}
             >
               <h1>{data.title}</h1>
-              <h2>Ниво: {data.knowledge_level}</h2>
-              <h3>Време за четене: {data.established_time}</h3>
+              <div className={styles.courseDescriptionLevelHolder}>
+                <h2>Ниво: {data.knowledge_level}</h2>
+                <h3>Време за четене: {data.established_time}</h3>
+              </div>
             </Link>
           ))}
       </Card>
