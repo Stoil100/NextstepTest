@@ -33,51 +33,20 @@ const Chart = () => {
         "ATOM",
         "CRO",
         "XTZ",
-        /*"AAPL",
-        "GOOG",
-        "TSLA",
-        "MSFT",
-        "AMZN",
-        "FB",
-        "BABA",
-        "BRK.A",
-        "JNJ",
-        "V",
-        "MA",
-        "WMT",
-        "PG",
-        "JPM",
-        "VZ",
-        "T",
-        "HD",
-        "INTC",
-        "PFE",
-        "UNH",
-        "EURUSD",
-        "GBPUSD",
-        "USDJPY",
-        "USDCHF",
-        "AUDUSD",
-        "USDCAD",
-        "NZDUSD",
-        "EURGBP",
-        "EURJPY",
-        "GBPJPY",
-        "AUDJPY",
-        "CHFJPY",
-        "EURAUD",
-        "GBPAUD",
-        "EURCAD",
-        "GBPCAD",
-        "EURCHF",
-        "AUDCAD",
-        "NZDCAD",*/
       ];
-      const promises = symbols.map((symbol) =>
-        Axios.get(
+      const promises = symbols.map((symbol) =>{
+        const cacheKey = `crypto-price-${symbol}`;
+        const cachedResponse = localStorage.getItem(cacheKey);
+        if (cachedResponse) {
+          return Promise.resolve(JSON.parse(cachedResponse));
+        }
+        return Axios.get(
           `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&symbols=${symbol}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h`
-        )
-      );
+        ).then(response => {
+          localStorage.setItem(cacheKey, JSON.stringify(response));
+          return response;
+        });
+      });
       const results = await Promise.all(promises);
       const prices = results.reduce((acc, result) => {
         console.log(acc);
@@ -111,7 +80,7 @@ const Chart = () => {
     {Object.keys(prices).length===0 && <Loader/>}
           <input
             className={styles.searchInput}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => setSearchTerm(e.target.value.toLocaleLowerCase())}
             placeholder={"Напишете символа на валутата която търсите"}
           ></input>
           <Card className={styles.chartItemsHolder}>
