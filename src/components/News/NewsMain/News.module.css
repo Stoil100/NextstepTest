@@ -1,9 +1,11 @@
 .newsBox{
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
-    align-items: flex-start;
-    flex-wrap: wrap;
+    align-items: center;
     gap:60px;
+    padding: 20px;
+    width: 90%;
 }
 .newsMainTitle{
     color:#fff;
@@ -11,9 +13,9 @@
 }
 .newsButtonsHolder{
     margin-top: 5px;
-    width: 80vw;
+    width: 80%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     padding: 40px;
@@ -29,4 +31,9 @@
 }
 .newsButttons:hover{
     background-color: rgb(0, 52, 95);
+}
+@media (max-width:415px) {
+    .newsBox{
+        width: 80%;
+    }
 }

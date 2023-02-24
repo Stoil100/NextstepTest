@@ -1,8 +1,8 @@
 
   .fab {
     position: fixed;
-    right: 48px;
-    bottom: 38px;
+    right: 5%;
+    bottom: 5%;
     border-radius: 50%;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     z-index: 10;
@@ -63,7 +63,8 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: #088aee;
+    background: #088aee88;
+    backdrop-filter: blur(5px);
     color: #e0e0e0;
     transition: 0.3s;
   }
@@ -79,7 +80,8 @@
     font-size: 16px;
     transition: 0.5s;
     color:#fff;
-    background-color: #0867b0;
+    background-color: #0867b07f;
+    border:1px solid #0867b0;
     padding: 4px;
     border-radius: 5px;
   }
@@ -88,4 +90,5 @@
     translate: 0;
     opacity: 1;
     visibility: visible;
+    backdrop-filter: blur(5px);
   }
