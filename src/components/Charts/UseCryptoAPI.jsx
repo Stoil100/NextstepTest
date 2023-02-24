@@ -1,3 +1,5 @@
+
+
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Card from "../UI/Cards/Card";
@@ -41,7 +43,7 @@ const Chart = () => {
           return Promise.resolve(JSON.parse(cachedResponse));
         }
         return Axios.get(
-          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&symbols=${symbol}&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h`
+          `https://api.coingecko.com/api/v3/coins/${symbol}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
         ).then(response => {
           localStorage.setItem(cacheKey, JSON.stringify(response));
           return response;
@@ -77,7 +79,8 @@ const Chart = () => {
   }, {});
   return (
     <>
-    {Object.keys(prices).length===0 && <Loader/>}
+    <CryptoList/>
+    {/*{Object.keys(prices).length===0 && <Loader/>}
           <input
             className={styles.searchInput}
             onChange={(e) => setSearchTerm(e.target.value.toLocaleLowerCase())}
@@ -106,7 +109,7 @@ const Chart = () => {
                 </Link>
               )
             )}
-          </Card>
+          </Card>*/}
     </>
   );
 };

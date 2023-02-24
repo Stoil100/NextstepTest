@@ -23,8 +23,8 @@ import RootLayout from "./components/Root/Root";
 import Course from "./components/Courses/Course/Course";
 import ErrorPage from "./components/UI/Errors/ErrorPage";
 import CourseItem from "./components/Courses/CourseItems/CourseItem";
-import Chart from "./components/Charts/Chart";
 import TradingViewWidget from "./components/Charts/TradingViewChart";
+import CryptoList from "./components/Charts/CryptoList";
 
 const router = createBrowserRouter([
   {
@@ -40,8 +40,8 @@ const router = createBrowserRouter([
       { path: "/Test/:testId", element: <Test /> },
       { path:"/courses", element:<Course/>},
       { path:"/courses/:courseId",element:<CourseItem/>},
-      {path:"/charts",element:<Chart/>},
-      {path:"/charts/:chartId",element:<TradingViewWidget/>},
+      {path:"/cryptoList",element:<CryptoList/>},
+      {path:"/cryptoList/:chartId",element:<TradingViewWidget/>},
     ],
   },
 ]);

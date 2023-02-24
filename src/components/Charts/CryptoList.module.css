@@ -1,3 +1,9 @@
+.cryptoList{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .chartItemsHolder{
     margin-top: 10px;
     height: 75vh;
@@ -22,7 +28,7 @@
 }
 .searchInput{
     margin-top: 10px;
-    width: 80vw;
+    width: 60vw;
     border: 3px solid #fff;
     text-align: center;
     color: #fff;
@@ -31,8 +37,8 @@
     height: 10vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 70vw;
+    align-items: flex-end;
+    width: 80vw;
     background-color: #e9f8f9;
     border-radius: 5px;
     margin: 10px;
@@ -49,7 +55,7 @@
 .valueDescription{
     font-weight: 600;
 }
-@media (max-width:800px) {
+@media (max-width:950px) {
     .valueHolder{
         height: 100%;
         flex-wrap: wrap;

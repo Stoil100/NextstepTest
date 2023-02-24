@@ -36,7 +36,7 @@ export const MenuButton = () => {
     navigate("/courses");
   };
   const searchHandler = () => {
-    navigate("/charts");
+    navigate("/cryptoList");
   };
 
   let getApiResponse = async (props) => {
@@ -70,7 +70,7 @@ export const MenuButton = () => {
       </button>
       <div className={styles.menu}>
         <button onClick={searchHandler}>
-          <img src={searchIcon} alt="profile" />
+          <img src={searchIcon} alt="charts" />
           <span>Диаграми</span>
         </button>
         <button onClick={profileHandler}>
