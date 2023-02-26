@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./SignUp.module.css";
@@ -17,6 +17,13 @@ const SignUp = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setErorr] = useState();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(ctx.isLoggedIn){
+      console.log("hello")
+      navigate("/profile")
+    }
+  },[ctx])
 
   const submitUserData = (e) => {
     e.preventDefault();

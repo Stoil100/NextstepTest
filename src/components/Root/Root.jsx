@@ -3,14 +3,14 @@ import { Outlet } from "react-router-dom";
 import AuthContext from "../store/auth-context";
 
 
-import Nav from "../Navigation/Nav";
-import MenuButton from "../UI/Buttons/MenuButton";
+import TopBar from "../TopBar/TopBar";
+import MenuButton from "../Nav/MenuButton";
 
 const RootLayout=()=>{
     const ctx = useContext(AuthContext);
     return(
         <>
-        <Nav/>
+        <TopBar/>
         <Outlet/>
         {ctx.isLoggedIn&&<MenuButton/>}
         </>

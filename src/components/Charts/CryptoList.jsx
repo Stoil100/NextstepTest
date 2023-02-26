@@ -74,7 +74,7 @@ const CryptoList = () => {
             <p>
               Daily Change: {crypto.price_change_percentage_24h.toFixed(2)}%
             </p>
-            <p>Market Cap:{crypto.market_cap}</p>
+            <p>Market Cap: {crypto.market_cap}</p>
             <p>Circulating Supply: {crypto.circulating_supply}</p>
             <p>Total Volume: {crypto.total_volume}</p>
           </Link>

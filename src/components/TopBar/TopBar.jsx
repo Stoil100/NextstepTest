@@ -2,11 +2,10 @@ import React,{ useContext } from "react";
 import AuthContext from "../store/auth-context";
 import logo from '../../assets/logo.png'
 
-import styles from "./Nav.module.css";
+import styles from "./TopBar.module.css";
 import { Link } from "react-router-dom";
 
-const Nav = (props) => {
-    const ctx=useContext(AuthContext)
+const TopBar = (props) => {
     return (
     <nav>
       <ul className={styles.navBar}>
@@ -20,4 +19,4 @@ const Nav = (props) => {
   );
 };
 
-export default Nav;
+export default TopBar;
