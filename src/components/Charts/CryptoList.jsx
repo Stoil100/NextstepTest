@@ -9,6 +9,8 @@ import Card from "../UI/Cards/Card";
 const CryptoList = () => {
   const [cryptoList, setCryptoList] = useState([]);
   const [filter, setFilter] = useState("");
+  const [sortKey, setSortKey] = useState("market_cap_rank");
+  const [sortOrder, setSortOrder] = useState("asc");
 
   const fetchCryptoData = async () => {
     const response = await axios.get(
@@ -16,8 +18,8 @@ const CryptoList = () => {
       {
         params: {
           vs_currency: "usd",
-          per_page: 200,
-          order: "market_cap_desc",
+          per_page: 1000,
+          order: "market_cap_desc_asc",
           sparkline: false,
           price_change_percentage: "24h",
           market_cap: true,
@@ -30,17 +32,6 @@ const CryptoList = () => {
     setCryptoList(response.data);
   };
 
-  /*useEffect(() => {
-    const cachedData = localStorage.getItem("cryptoData");
-    if (cachedData) {
-      setCryptoList(JSON.parse(cachedData));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("cryptoData", JSON.stringify(cryptoList));
-  }, [cryptoList]);*/
-
   useEffect(() => {
     fetchCryptoData();
     const intervalId = setInterval(fetchCryptoData, 60000);
@@ -52,6 +43,32 @@ const CryptoList = () => {
       crypto.name.toLowerCase().includes(filter.toLowerCase()) ||
       crypto.symbol.toLowerCase().includes(filter.toLowerCase())
   );
+  const handleSortChange = (key) => {
+    if (sortKey === key) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortKey(key);
+      setSortOrder("asc");
+    }
+  };
+  const sortedCryptoList = filteredCryptoList.sort((a, b) => {
+    const aValue = a[sortKey];
+    const bValue = b[sortKey];
+
+    if (sortKey === "total_volume") {
+      if (sortOrder === "asc") {
+        return aValue - bValue;
+      } else {
+        return bValue - aValue;
+      }
+    } else {
+      if (sortOrder === "asc") {
+        return aValue - bValue;
+      } else {
+        return bValue - aValue;
+      }
+    }
+  });
 
   return (
     <Card className={styles.cryptoList}>
@@ -61,6 +78,25 @@ const CryptoList = () => {
         onChange={(e) => setFilter(e.target.value)}
         placeholder={"Напишете символа на валутата която търсите"}
       />
+      <div className={styles.sortingBox}>
+        <h2>Sort By: </h2>
+        <div className={styles.sortItems}>
+          <button onClick={() => handleSortChange("market_cap_rank")}>
+            Sort by Market Cap Rank
+          </button>
+          <button onClick={() => handleSortChange("current_price")}>
+            Sort by Price
+          </button>
+          <button
+            onClick={() => handleSortChange("price_change_percentage_24h")}
+          >
+            Sort by Price Change (24h)
+          </button>
+          <button onClick={() => handleSortChange("total_volume")}>
+            Sort by Volume (24h)
+          </button>
+        </div>
+      </div>
       <Card className={styles.chartItemsHolder}>
         {filteredCryptoList.map((crypto) => (
           <Link
