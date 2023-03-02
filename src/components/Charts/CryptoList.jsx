@@ -82,18 +82,18 @@ const CryptoList = () => {
         <h2>Sort By: </h2>
         <div className={styles.sortItems}>
           <button onClick={() => handleSortChange("market_cap_rank")}>
-            Sort by Market Cap Rank
+            Market Cap Rank
           </button>
           <button onClick={() => handleSortChange("current_price")}>
-            Sort by Price
+            Price
           </button>
           <button
             onClick={() => handleSortChange("price_change_percentage_24h")}
           >
-            Sort by Price Change (24h)
+            Price Change (24h)
           </button>
           <button onClick={() => handleSortChange("total_volume")}>
-            Sort by Volume (24h)
+            Volume (24h)
           </button>
         </div>
       </div>

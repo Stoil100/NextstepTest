@@ -7,7 +7,8 @@ import plusIcon from "../../assets/plus.svg";
 import profileIcon from "../../assets/profile.svg";
 import newsIcon from "../../assets/news.svg";
 import logoutIcon from "../../assets/logout.svg";
-import searchIcon from "../../assets/search.svg"
+import searchIcon from "../../assets/search.svg";
+//import chatIcon from "../../assets/chat.svg";
 import AuthContext from "../store/auth-context";
 
 export const MenuButton = () => {
@@ -23,30 +24,26 @@ export const MenuButton = () => {
       password: `${ctx.enteredPassword}`,
     };
     getApiResponse(sendApiData);
+    setIsOpen(!isOpen);
     navigate("/login");
   };
-  const profileHandler = () => {
-    navigate("/profile");
-  };
-  const newsHandler = () => {
-    navigate("/news");
-  };
-  const articlesHandler = () => {
-    navigate("/courses");
-  };
-  const searchHandler = () => {
-    navigate("/cryptoList");
+  const navigationHandler = (props) => {
+    navigate(`/${props}`);
+    setIsOpen(!isOpen);
   };
 
   let getApiResponse = async (props) => {
     console.log(props);
-    let response = await fetch("https://nextstep-trading-backend.herokuapp.com/accounts/logout/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(props),
-    })
+    let response = await fetch(
+      "https://nextstep-trading-backend.herokuapp.com/accounts/logout/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(props),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         localStorage.removeItem("access key");
@@ -68,19 +65,43 @@ export const MenuButton = () => {
         <img src={plusIcon} alt="menu" />
       </button>
       <div className={styles.menu}>
-        <button onClick={searchHandler}>
+      {/* <button
+          onClick={() => {
+            navigationHandler("chat");
+          }}
+        >
+          <img src={chatIcon} alt="chat" />
+          <span>Chat</span>
+        </button> */}
+        <button
+          onClick={() => {
+            navigationHandler("cryptoList");
+          }}
+        >
           <img src={searchIcon} alt="charts" />
           <span>Диаграми</span>
         </button>
-        <button onClick={profileHandler}>
+        <button
+          onClick={() => {
+            navigationHandler("profile");
+          }}
+        >
           <img src={profileIcon} alt="profile" />
           <span>Профил</span>
         </button>
-        <button onClick={articlesHandler}>
+        <button
+          onClick={() => {
+            navigationHandler("courses");
+          }}
+        >
           <img src={homeIcon} alt="home" />
           <span>Курсове</span>
         </button>
-        <button onClick={newsHandler}>
+        <button
+          onClick={() => {
+            navigationHandler("news");
+          }}
+        >
           <img src={newsIcon} alt="news" />
           <span>Новини</span>
         </button>

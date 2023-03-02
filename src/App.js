@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { createBrowserRouter, Router, RouterProvider } from "react-router-dom";
 
-
 import styles from "./App.module.css";
 
 import SignUp from "./components/LoginSignup/Signup";
@@ -19,12 +18,13 @@ import ErrorPage from "./components/UI/Errors/ErrorPage";
 import CourseItem from "./components/Courses/CourseItems/CourseItem";
 import TradingViewWidget from "./components/Charts/TradingViewChart";
 import CryptoList from "./components/Charts/CryptoList";
+///import Chat from "./components/ChatSystem/Chat";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    errorElement:<ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       { path: "/", element: <MainPage /> },
       { path: "/signup", element: <SignUp /> },
@@ -32,10 +32,11 @@ const router = createBrowserRouter([
       { path: "/profile", element: <Profile /> },
       { path: "/news", element: <News /> },
       { path: "/Test/:testId", element: <Test /> },
-      { path:"/courses", element:<Course/>},
-      { path:"/courses/:courseId",element:<CourseItem/>},
-      {path:"/cryptoList",element:<CryptoList/>},
-      {path:"/cryptoList/:chartId",element:<TradingViewWidget/>},
+      { path: "/courses", element: <Course /> },
+      { path: "/courses/:courseId", element: <CourseItem /> },
+      { path: "/cryptoList", element: <CryptoList /> },
+      { path: "/cryptoList/:chartId", element: <TradingViewWidget /> },
+     // { path: "/chat", element: <Chat /> },
     ],
   },
 ]);

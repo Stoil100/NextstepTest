@@ -1,11 +1,10 @@
 import React,{ useContext } from "react";
-import AuthContext from "../store/auth-context";
 import logo from '../../assets/logo.png'
 
 import styles from "./TopBar.module.css";
 import { Link } from "react-router-dom";
 
-const TopBar = (props) => {
+const TopBar = () => {
     return (
     <nav>
       <ul className={styles.navBar}>
