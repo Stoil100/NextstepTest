@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Card from "../../UI/Cards/Card";
 import styles from "./Test.module.css";
@@ -9,73 +9,82 @@ import arrowNext from "../../../assets/arrowNext.svg";
 import arrowPrevious from "../../../assets/arrowPrevious.svg";
 import Loader from "../../UI/Loader/Loader";
 import SubmitTestModal from "../../UI/SubmitModals/SubmitTestModal";
-import { type } from "@testing-library/user-event/dist/type";
 
-const Test = (props) => {
+const Test = () => {
+  const testHolderRef = useRef(null);
   const params = useParams();
   const [userPoints, setUserPoints] = useState();
-  let [list, setList] = useState([]);
+  const [list, setList] = useState([]);
   const navigate = useNavigate();
   let counter = 1;
 
-  useEffect(() => {
-    fetch("https://nextstep-trading-backend.herokuapp.com/knowledge_quiz/quiz/")
-      .then((response) => response.json())
-      .then((data) => {
-        data.map((item) => {
-          if (item.article_id === parseInt(params.testId))
-            setList(item.quiz_questions);
-        });
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await fetch(
+        "https://nextstep-trading-backend.herokuapp.com/knowledge_quiz/quiz/"
+      );
+      const data = await response.json();
+      const quizQuestions = data
+        .filter((item) => item.article_id === parseInt(params.testId))
+        .flatMap((item) => item.quiz_questions);
+      setList(quizQuestions);
+    } catch (err) {
+      console.log(err.message);
+    }
   }, [params.testId]);
 
-  const checkValue = (value, id) => {
-    console.log(value, id);
-    console.log(list.at(0).id);
-    if (list.at(id - list.at(0).id).rightAnswer === value) {
-      list.at(id - list.at(0).id).choice = true;
-    } else {
-      list.at(id - list.at(0).id).choice = false;
-    }
-    console.log(list.at(id - list.at(0).id).choice);
-  };
-  const prevBtnClicked = () => {
-    if (counter !== 0) {
-      counter--;
-    }
-    window.scrollTo(0, window.innerHeight * counter);
-  };
-  const nextBtnClicked = () => {
-    if (counter !== 100) {
-      counter++;
-    }
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
-    window.scrollTo(0, window.innerHeight * counter);
-  };
-  const submitTest = () => {
-    let sumUserPoints = 0;
-    list.forEach((item) => {
-      if (item.choice === true) sumUserPoints += item.points;
-    });
-    console.log(sumUserPoints);
-    const localPointsValue = localStorage.getItem("pointsValue");
-    if (localPointsValue === null)
-      localStorage.setItem("pointsValue", sumUserPoints);
-    else {
-      localStorage.setItem(
-        "pointsValue",
-        parseInt(localPointsValue) + sumUserPoints
+  const checkValue = useCallback((value, id) => {
+    const index = id - list[0].id;
+    if (list[index].rightAnswer === value) {
+      setList((list) =>
+        list.map((item, i) => (i === index ? { ...item, choice: true } : item))
+      );
+    } else {
+      setList((list) =>
+        list.map((item, i) => (i === index ? { ...item, choice: false } : item))
       );
     }
+  },[list]);
 
+  const prevBtnClicked = useCallback(() => {
+    if (counter !== 0) {
+      counter--;
+      console.log(testHolderRef.current)
+      testHolderRef.current.children[counter].scrollIntoView({
+        behavior: "smooth",
+        block:"end"
+      });
+    }
+  }, [counter]);
+  
+  const nextBtnClicked = useCallback(() => {
+    if (counter !== 100) {
+      counter++;
+      testHolderRef.current.children[counter].scrollIntoView({
+        behavior: "smooth",
+        block:"end"
+      });
+    }
+  }, [counter]);
+  
+
+  const submitTest = useCallback(() => {
+    const sumUserPoints = list.reduce((sum, item) => {
+      return item.choice === true ? sum + item.points : sum;
+    }, 0);
+    const localPointsValue = localStorage.getItem("pointsValue") || 0;
+    localStorage.setItem("pointsValue", parseInt(localPointsValue) + sumUserPoints);
     setUserPoints(sumUserPoints);
-  };
-  const confirmSubmit = () => {
+  },[list]);
+
+  const confirmSubmit = useCallback(() => {
     navigate("/profile");
-  };
+  },[]);
+
   return (
     <>
       {userPoints !== undefined && (
@@ -88,7 +97,7 @@ const Test = (props) => {
       <button className={styles.nextQ} onClick={nextBtnClicked}>
         <img src={arrowNext} alt="Next" />
       </button>
-      <Card className={styles.testHolder}>
+      <div className={styles.testHolder} ref={testHolderRef}>
         {list.map((data) => (
           <TestItem
             key={data.id}
@@ -106,7 +115,7 @@ const Test = (props) => {
         <button className={styles.submitButton} onClick={submitTest}>
           Submit
         </button>
-      </Card>
+      </div>
     </>
   );
 };

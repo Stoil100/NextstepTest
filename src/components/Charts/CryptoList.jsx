@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useMemo,useCallback } from "react";
 import { Link } from "react-router-dom";
 
 import styles from "./CryptoList.module.css";
@@ -28,7 +28,6 @@ const CryptoList = () => {
         },
       }
     );
-    console.log(response.data);
     setCryptoList(response.data);
   };
 
@@ -43,32 +42,26 @@ const CryptoList = () => {
       crypto.name.toLowerCase().includes(filter.toLowerCase()) ||
       crypto.symbol.toLowerCase().includes(filter.toLowerCase())
   );
-  const handleSortChange = (key) => {
+  const handleSortChange = useCallback((key) => {
     if (sortKey === key) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
       setSortKey(key);
       setSortOrder("asc");
     }
-  };
-  const sortedCryptoList = filteredCryptoList.sort((a, b) => {
+  }, [sortKey, sortOrder]);
+
+  const sortedCryptoList = useMemo(() =>
+  filteredCryptoList.sort((a, b) => {
     const aValue = a[sortKey];
     const bValue = b[sortKey];
-
+    
     if (sortKey === "total_volume") {
-      if (sortOrder === "asc") {
-        return aValue - bValue;
-      } else {
-        return bValue - aValue;
-      }
+      return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
     } else {
-      if (sortOrder === "asc") {
-        return aValue - bValue;
-      } else {
-        return bValue - aValue;
-      }
+      return sortOrder === "asc" ? aValue - bValue : bValue - aValue;
     }
-  });
+  }), [filteredCryptoList, sortKey, sortOrder]);
 
   return (
     <Card className={styles.cryptoList}>

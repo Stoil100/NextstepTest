@@ -3,8 +3,7 @@
     justify-content: flex-start;
     gap:10px;
     width: 100vw;
-    height: 100vh;
-    
+    height: 90vh;
 }
 
 .formHolder {
@@ -13,7 +12,6 @@
     position: relative;
     border-radius: 10px;
     padding: 10px;
-    
 }
 .testTitle{
     color:#FFF;
@@ -209,5 +207,14 @@
 @media (max-width:500px) {
     .testTitle{
         font-size: 2.5rem;
+    }
+    .worm__segment{
+        opacity: 0;
+    }
+}
+
+@media (max-width:300px) {
+    .testTitle{
+        font-size: 1.5rem;
     }
 }

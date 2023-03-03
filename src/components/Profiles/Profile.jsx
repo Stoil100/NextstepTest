@@ -1,11 +1,10 @@
-import React,{useContext,useState,useEffect} from "react";
+import React,{useState,useEffect} from "react";
 import jwtDecode from "jwt-decode";
 
 import styles from "./Profile.module.css";
 import Card from "../UI/Cards/Card";
 import personIcon from '../../assets/person.svg';
 
-import AuthContext from "../store/auth-context";
 import Loader from "../UI/Loader/Loader";
 
 const Profile = (props) => {
@@ -18,7 +17,6 @@ const Profile = (props) => {
     // If the token exists, decode it to get the user's profile information
     if (token) {
       const decodedToken = jwtDecode(token);
-      console.log(decodedToken)
       setProfile({
         name: decodedToken.username,
         email: decodedToken.email,

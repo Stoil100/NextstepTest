@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./SignUp.module.css";
@@ -16,38 +16,37 @@ const SignUp = (props) => {
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setErorr] = useState();
+  const [error, setError] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
     if(ctx.isLoggedIn){
-      console.log("hello")
       navigate("/profile")
     }
-  },[ctx])
+  },[ctx.isLoggedIn])
 
-  const submitUserData = (e) => {
+  const submitUserData =  useCallback((e) => {
     e.preventDefault();
     if (
       enteredEmail.trim().length === 0 ||
       enteredPassword.trim() === 0 ||
       enteredUsername.trim().length <= 3
     ) {
-      setErorr({
+      setError({
         title: "Невалидни данни!",
         message: "Моля въведете правилно име, емейл и парола.",
       });
       return;
     }
     if (enteredPassword.length < 8) {
-      setErorr({
+      setError({
         title: "Невалидна парола!",
         message: "Паролата трябва да е поне 8 символа.",
       });
       return;
     }
     if (enteredPassword !== enteredConfirmPassword) {
-      setErorr({
+      setError({
         title: "Паролите не са едни и същи!",
         message: "Моля потвърдете че сте въвели правилна парола.",
       });
@@ -67,25 +66,25 @@ const SignUp = (props) => {
     setEnteredEmail("");
     setEnteredPassword("");
     setEnteredUsername("");
-  };
+  }, [enteredEmail, enteredPassword, enteredUsername, enteredConfirmPassword]);
 
-  const emailChangeHandler = (e) => {
+  const emailChangeHandler = useCallback((e) => {
     setEnteredEmail(e.target.value);
-  };
+  },[]);
 
-  const passwordChangeHandler = (e) => {
+  const passwordChangeHandler = useCallback((e) => {
     setEnteredPassword(e.target.value);
-  };
-  const usernameChangeHandler = (e) => {
+  },[]);
+  const usernameChangeHandler = useCallback((e) => {
     setEnteredUsername(e.target.value);
-  };
+  },[]);
 
-  const confirmPasswordChangeHandler = (e) => {
+  const confirmPasswordChangeHandler = useCallback((e) => {
     setEnteredConfirmPassword(e.target.value);
-  };
-  const errorHandler = () => {
-    setErorr(null);
-  };
+  },[]);
+  const errorHandler = useCallback(() => {
+    setError(null);
+  },[]);
 
   let getApiResponse = async (props) => {
     console.log(props);
@@ -109,7 +108,6 @@ const SignUp = (props) => {
       });
   };
   const getApiKey = async (props) => {
-    console.log(props);
     const response = await fetch(
       "https://nextstep-trading-backend.herokuapp.com/accounts/token/",
       {
@@ -122,7 +120,6 @@ const SignUp = (props) => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         localStorage.setItem("access token", data.access);
         localStorage.setItem("refresh token", data.refresh);
         navigate("/profile");

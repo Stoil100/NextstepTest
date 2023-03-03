@@ -41,5 +41,6 @@ body{
 @media (max-width:600px) {
     .prevQ,.nextQ{
         opacity: 0;
+        display: none;
     }
 }
