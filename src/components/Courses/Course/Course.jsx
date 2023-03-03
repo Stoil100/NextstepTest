@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import styles from "./Course.module.css";
 import Card from "../../UI/Cards/Card";
 import Loader from "../../UI/Loader/Loader";
-import CourseItem from "../CourseItems/CourseItem";
 
 const Course = () => {
   const [list, setList] = useState([]);
@@ -19,8 +18,6 @@ const Course = () => {
       });
   }, []);
 
-  console.log(list);
-
   return (
     <>
       {list.length === 0 && <Loader />}
@@ -34,6 +31,7 @@ const Course = () => {
                 data: data,
               }}
               className={styles.courseItem}
+              key={data.title}
             >
               <h1>{data.title}</h1>
               <div className={styles.courseDescriptionLevelHolder}>

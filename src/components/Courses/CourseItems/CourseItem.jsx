@@ -8,7 +8,6 @@ const CourseItem = (props) => {
 
   const location = useLocation();
   const data = location.state?.data;
-  console.log(data);
   let testId = params.courseId.slice(-1);
   return (
     <Card className={styles.courseBox}>

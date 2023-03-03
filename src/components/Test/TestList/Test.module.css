@@ -3,6 +3,7 @@ body{
 
 }
 .testHolder{
+    display:flex;
     flex-direction: column;
 }
 .prevQ,.nextQ{

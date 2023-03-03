@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import styles from "./CryptoList.module.css";
 
 import Card from "../UI/Cards/Card";
+import Loader from "../UI/Loader/Loader";
 
 const CryptoList = () => {
   const [cryptoList, setCryptoList] = useState([]);
@@ -64,6 +65,8 @@ const CryptoList = () => {
   }), [filteredCryptoList, sortKey, sortOrder]);
 
   return (
+    <>
+    {filteredCryptoList.length===0&&<Loader/>}
     <Card className={styles.cryptoList}>
       <input
         className={styles.searchInput}
@@ -110,6 +113,7 @@ const CryptoList = () => {
         ))}
       </Card>
     </Card>
+    </>
   );
 };
 

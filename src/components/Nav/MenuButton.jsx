@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./MenuButton.module.css";
 
 import homeIcon from "../../assets/home.svg";
@@ -8,7 +8,7 @@ import profileIcon from "../../assets/profile.svg";
 import newsIcon from "../../assets/news.svg";
 import logoutIcon from "../../assets/logout.svg";
 import searchIcon from "../../assets/search.svg";
-//import chatIcon from "../../assets/chat.svg"
+//import chatIcon from "../../assets/chat.svg";
 
 import AuthContext from "../store/auth-context";
 
@@ -40,11 +40,7 @@ const MenuButton = () => {
         <img src={plusIcon} alt="menu" />
       </button>
       <div className={styles.menu}>
-        {/* <button
-          onClick={() => {
-            navigationHandler("chat");
-          }}
-        >
+        {/* <button onClick={() => navigationHandler("chat")}>
           <img src={chatIcon} alt="chat" />
           <span>Chat</span>
         </button> */}

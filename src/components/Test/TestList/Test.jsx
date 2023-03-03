@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import Card from "../../UI/Cards/Card";
 import styles from "./Test.module.css";
 
 import TestItem from "../TestItem/TestItem";
@@ -16,7 +15,7 @@ const Test = () => {
   const [userPoints, setUserPoints] = useState();
   const [list, setList] = useState([]);
   const navigate = useNavigate();
-  let counter = 1;
+  let counter = 0;
 
   const fetchData = useCallback(async () => {
     try {
