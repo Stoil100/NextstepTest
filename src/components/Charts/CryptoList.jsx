@@ -66,13 +66,14 @@ const CryptoList = () => {
 
   return (
     <>
-    {filteredCryptoList.length===0&&<Loader/>}
+    {filteredCryptoList.length===0&&filter===""?<Loader/>:""}
     <Card className={styles.cryptoList}>
       <input
         className={styles.searchInput}
         type="text"
         onChange={(e) => setFilter(e.target.value)}
         placeholder={"Напишете символа на валутата която търсите"}
+        id="searchInput"
       />
       <div className={styles.sortingBox}>
         <h2>Sort By: </h2>
@@ -104,7 +105,7 @@ const CryptoList = () => {
             <h3>{crypto.symbol.toUpperCase()}</h3>
             <h4>Current Price: {crypto.current_price}</h4>
             <p>
-              Daily Change: {crypto.price_change_percentage_24h.toFixed(2)}%
+              Daily Change: {parseFloat(crypto.price_change_percentage_24h).toFixed(2)}%
             </p>
             <p>Market Cap: {crypto.market_cap}</p>
             <p>Circulating Supply: {crypto.circulating_supply}</p>
