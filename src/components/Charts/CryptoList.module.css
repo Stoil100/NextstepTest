@@ -60,14 +60,12 @@
     align-items: flex-end;
     width: 80vw;
     background-color: #e9f8f9;
-    border-radius: 5px;
-    margin: 10px;
+    border-bottom: 1px solid gray;
 }
 .valueHolder *{
     padding:2px;
     color:black;
     margin: 5px;
-    border-bottom: 2px solid black;
 }
 .valueHolder img{
     border:none;
