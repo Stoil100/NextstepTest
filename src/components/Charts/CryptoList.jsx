@@ -63,21 +63,52 @@ const CryptoList = () => {
   }, []);
 
   const getCryptoGraph = (chart) => {
-    const chartUrl = `https://quickchart.io/chart?c=${encodeURIComponent(JSON.stringify({
-      type: 'line',
-      data: {
-        labels: [".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",],
-        datasets: [{
-          label: 'Price',
-          data: chart,
-          borderColor: 'rgba(255, 99, 132, 1)',
-          fill: false,
-          values:`${chart.join(',')}`
-        }]
-      },
-      options:{axes:{y:{labels:{position:'left'}}}},
-    }))}`;
-    return chartUrl
+    const chartUrl = `https://quickchart.io/chart?c=${encodeURIComponent(
+      JSON.stringify({
+        type: "sparkline",
+        data: {
+          labels: [
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+            ".",
+          ],
+          datasets: [
+            {
+              label: "Price",
+              data: chart,
+              borderColor: "rgba(255, 99, 132, 1)",
+              fill: false,
+              values: `${chart.join(",")}`,
+            },
+          ],
+        },
+        options: { axes: { y: { labels: { position: "left" } } } },
+      })
+    )}`;
+    return chartUrl;
   };
 
   const itemsPerPage = 10;
@@ -120,7 +151,8 @@ const CryptoList = () => {
     [pageFilteredCryptoList, sortKey, sortOrder]
   );
   const handleCryptoHover = (crypto) => {
-    if (crypto !== null) {
+    console.log(typeof crypto.graph);
+    if (crypto !== null || crypto.graph===undefined) {
       crypto.graph = getCryptoGraph(crypto.sparkline_in_7d.price.reverse());
     }
     setHoveredCrypto(crypto);
@@ -132,146 +164,161 @@ const CryptoList = () => {
 
   return (
     <>
-      <Grid container spacing={2} sx={{backgroundColor:"rgba(0, 0, 0, 0.253)",px:2}}>
-        <Grid item xs={12} md={6}>
-          <CryptoListCard>
-            <CardContent>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <InputBase
-                    fullWidth
-                    placeholder="Search crypto"
-                    onChange={(e) => setFilter(e.target.value)}
-                  />
-                </Grid>
-                <Grid item>
-                  <div>
-                    <Typography variant="h6">Sort By:</Typography>
-                    <ButtonGroup variant="text">
-                      <Button
-                        onClick={() => handleSortChange("market_cap_rank")}
-                      >
-                        Market Cap Rank
-                      </Button>
-                      <Button onClick={() => handleSortChange("current_price")}>
-                        Price
-                      </Button>
-                      <Button
-                        onClick={() =>
-                          handleSortChange("price_change_percentage_24h")
-                        }
-                      >
-                        Price Change (24h)
-                      </Button>
-                      <Button onClick={() => handleSortChange("total_volume")}>
-                        Volume (24h)
-                      </Button>
-                    </ButtonGroup>
-                  </div>
-                </Grid>
-                <Grid item xs={12} md={12}>
-                  {hoveredCrypto && (
-                    
-                    <CryptoListCard style={{display:"flex"}}>
-                      <CardContent>
-                        <Typography variant="h6">
-                          {hoveredCrypto.name}
-                        </Typography>
-                        <Typography variant="subtitle1">
-                          {hoveredCrypto.symbol.toUpperCase()}
-                        </Typography>
-                        <Typography variant="body1">
-                          Current Price: {hoveredCrypto.current_price}
-                        </Typography>
-                        <Typography
-                          variant="body1"
-                          sx={{
-                            color:
-                              parseFloat(
-                                hoveredCrypto.price_change_percentage_24h
-                              ).toFixed(2) > 0
-                                ? "green"
-                                : "red",
-                          }}
-                        >
-                          {parseFloat(
-                            hoveredCrypto.price_change_percentage_24h
-                          ).toFixed(2)}
-                          %
-                        </Typography>
-                        <Typography variant="body1">
-                          Market Cap: {hoveredCrypto.market_cap}
-                        </Typography>
-                        <Typography variant="body1">
-                          Circulating Supply: {hoveredCrypto.circulating_supply}
-                        </Typography>
-                        <Typography variant="body1">
-                          Total Volume: {hoveredCrypto.total_volume}
-                        </Typography>
-                      </CardContent>
-                      <img src={hoveredCrypto.graph} style={{ height: "200px",width:"400px" }}/>
-                    </CryptoListCard>
-                  )}
-                </Grid>
-              </Grid>
-            </CardContent>
-          </CryptoListCard>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Box>
+      {cryptoList.lenght === 0 ? (
+        <Loader />
+      ) : (
+        <Grid
+          container
+          spacing={2}
+          sx={{ backgroundColor: "rgba(0, 0, 0, 0.253)", px: 2 }}
+        >
+          <Grid item xs={12} md={6}>
             <CryptoListCard>
               <CardContent>
-                {pageFilteredCryptoList.map((crypto) => (
-                  <Box
-                    onMouseEnter={() => handleCryptoHover(crypto)}
-                    onMouseLeave={() => handleCryptoHover(null)}
-                    key={crypto.symbol}
-                    component={Link}
-                    to={`/cryptoList/${crypto.symbol.toUpperCase()}USDT`}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      borderBottom: "1px solid black",
-                      textDecoration: "none",
-                      color: "black",
-                      padding: 1,
-                    }}
-                  >
-                    <img
-                      src={crypto.image}
-                      alt={crypto.name}
-                      style={{ height: "32px" }}
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <InputBase
+                      fullWidth
+                      placeholder="Search crypto"
+                      onChange={(e) => setFilter(e.target.value)}
                     />
-                    <Typography variant="h6">{crypto.name}</Typography>
-                    <Typography variant="subtitle1">
-                      {crypto.symbol.toUpperCase()}
-                    </Typography>
-                    <Typography variant="body1">
-                      Current Price: {crypto.current_price}
-                    </Typography>
-                  </Box>
-                ))}
+                  </Grid>
+                  <Grid item>
+                    <div>
+                      <Typography variant="h6">Sort By:</Typography>
+                      <ButtonGroup variant="text">
+                        <Button
+                          onClick={() => handleSortChange("market_cap_rank")}
+                        >
+                          Market Cap Rank
+                        </Button>
+                        <Button
+                          onClick={() => handleSortChange("current_price")}
+                        >
+                          Price
+                        </Button>
+                        <Button
+                          onClick={() =>
+                            handleSortChange("price_change_percentage_24h")
+                          }
+                        >
+                          Price Change (24h)
+                        </Button>
+                        <Button
+                          onClick={() => handleSortChange("total_volume")}
+                        >
+                          Volume (24h)
+                        </Button>
+                      </ButtonGroup>
+                    </div>
+                  </Grid>
+                  <Grid item xs={12} md={12}>
+                    {hoveredCrypto && (
+                      <CryptoListCard style={{ display: "flex" }}>
+                        <CardContent>
+                          <Typography variant="h6">
+                            {hoveredCrypto.name}
+                          </Typography>
+                          <Typography variant="subtitle1">
+                            {hoveredCrypto.symbol.toUpperCase()}
+                          </Typography>
+                          <Typography variant="body1">
+                            Current Price: {hoveredCrypto.current_price}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            sx={{
+                              color:
+                                parseFloat(
+                                  hoveredCrypto.price_change_percentage_24h
+                                ).toFixed(2) > 0
+                                  ? "green"
+                                  : "red",
+                            }}
+                          >
+                            {parseFloat(
+                              hoveredCrypto.price_change_percentage_24h
+                            ).toFixed(2)}
+                            %
+                          </Typography>
+                          <Typography variant="body1">
+                            Market Cap: {hoveredCrypto.market_cap}
+                          </Typography>
+                          <Typography variant="body1">
+                            Circulating Supply:{" "}
+                            {hoveredCrypto.circulating_supply}
+                          </Typography>
+                          <Typography variant="body1">
+                            Total Volume: {hoveredCrypto.total_volume}
+                          </Typography>
+                        </CardContent>
+                        <img
+                          src={hoveredCrypto.graph}
+                          style={{ height: "200px", width: "400px" }}
+                        />
+                      </CryptoListCard>
+                    )}
+                  </Grid>
+                </Grid>
               </CardContent>
-              <Box xs={12} sx={{ display: "flex", justifyContent: "center" }}>
-                <Pagination
-                  count={totalPages}
-                  page={page}
-                  onChange={handlePageChange}
-                  size="small"
-                  color="primary"
-                  sx={{
-                    position: "relative",
-                    maxWidth: "sm",
-                    backgroundColor: "white",
-                    zIndex: 2,
-                  }}
-                />
-              </Box>
             </CryptoListCard>
-          </Box>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box>
+              <CryptoListCard>
+                <CardContent>
+                  {pageFilteredCryptoList.map((crypto) => (
+                    <Box
+                      onMouseEnter={() => handleCryptoHover(crypto)}
+                      onMouseLeave={() => handleCryptoHover(null)}
+                      key={crypto.symbol}
+                      component={Link}
+                      to={`/cryptoList/${crypto.symbol.toUpperCase()}USDT`}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        borderBottom: "1px solid black",
+                        textDecoration: "none",
+                        color: "black",
+                        padding: 1,
+                      }}
+                    >
+                      <img
+                        src={crypto.image}
+                        alt={crypto.name}
+                        style={{ height: "32px" }}
+                      />
+                      <Typography variant="h6">{crypto.name}</Typography>
+                      <Typography variant="subtitle1">
+                        {crypto.symbol.toUpperCase()}
+                      </Typography>
+                      <Typography variant="body1">
+                        Current Price: {crypto.current_price}
+                      </Typography>
+                    </Box>
+                  ))}
+                </CardContent>
+                <Box xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+                  <Pagination
+                    count={totalPages}
+                    page={page}
+                    onChange={handlePageChange}
+                    size="small"
+                    color="primary"
+                    sx={{
+                      position: "relative",
+                      maxWidth: "sm",
+                      backgroundColor: "white",
+                      zIndex: 2,
+                    }}
+                  />
+                </Box>
+              </CryptoListCard>
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
+      )}
     </>
   );
 };
