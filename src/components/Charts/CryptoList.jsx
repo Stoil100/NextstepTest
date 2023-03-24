@@ -277,7 +277,6 @@ const CryptoList = () => {
                       to={`/cryptoList/${crypto.symbol.toUpperCase()}USDT`}
                       sx={{
                         display: "flex",
-                        justifyContent: "space-between",
                         alignItems: "center",
                         borderBottom: "1px solid black",
                         textDecoration: "none",
@@ -288,13 +287,13 @@ const CryptoList = () => {
                       <img
                         src={crypto.image}
                         alt={crypto.name}
-                        style={{ height: "32px" }}
+                        style={{ height: "32px",marginRight:10}}
                       />
-                      <Typography variant="h6">{crypto.name}</Typography>
-                      <Typography variant="subtitle1">
+                      <Typography variant="h6" sx={{flex:1.5}}>{crypto.name}</Typography>
+                      <Typography variant="subtitle1" sx={{flex:0.5}}>
                         {crypto.symbol.toUpperCase()}
                       </Typography>
-                      <Typography variant="body1">
+                      <Typography variant="body1" sx={{flex:1}}>
                         Current Price: {crypto.current_price}
                       </Typography>
                     </Box>
