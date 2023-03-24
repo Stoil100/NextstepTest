@@ -16,14 +16,14 @@ import {
   Pagination,
 } from "@mui/material";
 
-import styled from "styled-components";
+// import styled from "styled-components";
 
-const CryptoListCard = styled(Card)({
-  marginTop: "16px",
-  width: "100%",
-  boxShadow: "none",
-  border: "1px solid #e3e3e3",
-});
+// const CryptoListCard = styled(Card)({
+//   marginTop: "16px",
+//   width: "100%",
+//   boxShadow: "none",
+//   border: "1px solid #e3e3e3",
+// });
 
 const CryptoList = () => {
   const [cryptoList, setCryptoList] = useState([]);
@@ -170,10 +170,10 @@ const CryptoList = () => {
         <Grid
           container
           spacing={2}
-          sx={{ backgroundColor: "rgba(0, 0, 0, 0.253)", px: 2 }}
+          sx={{ backgroundColor: "rgba(0, 0, 0, 0.253)", padding: 2 }}
         >
           <Grid item xs={12} md={6}>
-            <CryptoListCard>
+            <Box sx={{mt:"16px",width:"100%",border:1,borderColor:"#e3e3e3",boxShadow:"none",backgroundColor:"#fff",borderRadius:"5px"}}>
               <CardContent>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
@@ -181,6 +181,7 @@ const CryptoList = () => {
                       fullWidth
                       placeholder="Search crypto"
                       onChange={(e) => setFilter(e.target.value)}
+                      sx={{border:1 ,borderColor:"#e3e3e3",borderRadius:"5px"}}
                     />
                   </Grid>
                   <Grid item>
@@ -214,7 +215,7 @@ const CryptoList = () => {
                   </Grid>
                   <Grid item xs={12} md={12}>
                     {hoveredCrypto && (
-                      <CryptoListCard style={{ display: "flex" }}>
+                      <Box sx={{mt:"16px",width:"100%",border:1,borderColor:"#e3e3e3",boxShadow:"none",backgroundColor:"#fff",borderRadius:"5px",display: "flex"}}>
                         <CardContent>
                           <Typography variant="h6">
                             {hoveredCrypto.name}
@@ -256,16 +257,16 @@ const CryptoList = () => {
                           src={hoveredCrypto.graph}
                           style={{ height: "200px", width: "400px" }}
                         />
-                      </CryptoListCard>
+                      </Box>
                     )}
                   </Grid>
                 </Grid>
               </CardContent>
-            </CryptoListCard>
+            </Box>
           </Grid>
           <Grid item xs={12} md={6}>
             <Box>
-              <CryptoListCard>
+              <Box sx={{mt:"16px",width:"100%",border:1,borderColor:"#e3e3e3",boxShadow:"none",backgroundColor:"#fff",borderRadius:"5px"}}>
                 <CardContent>
                   {pageFilteredCryptoList.map((crypto) => (
                     <Box
@@ -314,7 +315,7 @@ const CryptoList = () => {
                     }}
                   />
                 </Box>
-              </CryptoListCard>
+              </Box>
             </Box>
           </Grid>
         </Grid>
