@@ -152,7 +152,7 @@ const CryptoList = () => {
   );
   const handleCryptoHover = (crypto) => {
     console.log(typeof crypto.graph);
-    if (crypto !== null || crypto.graph===undefined) {
+    if (crypto !== null || crypto.graph === undefined) {
       crypto.graph = getCryptoGraph(crypto.sparkline_in_7d.price.reverse());
     }
     setHoveredCrypto(crypto);
@@ -173,7 +173,17 @@ const CryptoList = () => {
           sx={{ backgroundColor: "rgba(0, 0, 0, 0.253)", padding: 2 }}
         >
           <Grid item xs={12} md={6}>
-            <Box sx={{mt:"16px",width:"100%",border:1,borderColor:"#e3e3e3",boxShadow:"none",backgroundColor:"#fff",borderRadius:"5px"}}>
+            <Box
+              sx={{
+                mt: "16px",
+                width: "100%",
+                border: 1,
+                borderColor: "#e3e3e3",
+                boxShadow: "none",
+                backgroundColor: "#fff",
+                borderRadius: "5px",
+              }}
+            >
               <CardContent>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
@@ -181,7 +191,11 @@ const CryptoList = () => {
                       fullWidth
                       placeholder="Search crypto"
                       onChange={(e) => setFilter(e.target.value)}
-                      sx={{border:1 ,borderColor:"#e3e3e3",borderRadius:"5px"}}
+                      sx={{
+                        border: 1,
+                        borderColor: "#e3e3e3",
+                        borderRadius: "5px",
+                      }}
                     />
                   </Grid>
                   <Grid item>
@@ -215,7 +229,18 @@ const CryptoList = () => {
                   </Grid>
                   <Grid item xs={12} md={12}>
                     {hoveredCrypto && (
-                      <Box sx={{mt:"16px",width:"100%",border:1,borderColor:"#e3e3e3",boxShadow:"none",backgroundColor:"#fff",borderRadius:"5px",display: "flex"}}>
+                      <Box
+                        sx={{
+                          mt: "16px",
+                          width: "100%",
+                          border: 1,
+                          borderColor: "#e3e3e3",
+                          boxShadow: "none",
+                          backgroundColor: "#fff",
+                          borderRadius: "5px",
+                          display: "flex",
+                        }}
+                      >
                         <CardContent>
                           <Typography variant="h6">
                             {hoveredCrypto.name}
@@ -266,7 +291,17 @@ const CryptoList = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Box>
-              <Box sx={{mt:"16px",width:"100%",border:1,borderColor:"#e3e3e3",boxShadow:"none",backgroundColor:"#fff",borderRadius:"5px"}}>
+              <Box
+                sx={{
+                  mt: "16px",
+                  width: "100%",
+                  border: 1,
+                  borderColor: "#e3e3e3",
+                  boxShadow: "none",
+                  backgroundColor: "#fff",
+                  borderRadius: "5px",
+                }}
+              >
                 <CardContent>
                   {pageFilteredCryptoList.map((crypto) => (
                     <Box
@@ -275,25 +310,35 @@ const CryptoList = () => {
                       key={crypto.symbol}
                       component={Link}
                       to={`/cryptoList/${crypto.symbol.toUpperCase()}USDT`}
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        borderBottom: "1px solid black",
-                        textDecoration: "none",
-                        color: "black",
-                        padding: 1,
-                      }}
+                      sx={[
+                        {
+                          "&:hover": {
+                            backgroundColor: "#e3e3e3",
+                          },
+                        },
+                        {
+                          display: "flex",
+                          alignItems: "center",
+                          borderBottom: "1px solid black",
+                          textDecoration: "none",
+                          color: "black",
+                          padding: 1,
+                          transition:"0.3s"
+                        },
+                      ]}
                     >
                       <img
                         src={crypto.image}
                         alt={crypto.name}
-                        style={{ height: "32px",marginRight:10}}
+                        style={{ height: "32px", marginRight: 10 }}
                       />
-                      <Typography variant="h6" sx={{flex:1.5}}>{crypto.name}</Typography>
-                      <Typography variant="subtitle1" sx={{flex:0.5}}>
+                      <Typography variant="h6" sx={{ flex: 1.5 }}>
+                        {crypto.name}
+                      </Typography>
+                      <Typography variant="subtitle1" sx={{ flex: 0.5 }}>
                         {crypto.symbol.toUpperCase()}
                       </Typography>
-                      <Typography variant="body1" sx={{flex:1}}>
+                      <Typography variant="body1" sx={{ flex: 1 }}>
                         Current Price: {crypto.current_price}
                       </Typography>
                     </Box>
