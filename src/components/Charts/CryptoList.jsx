@@ -164,7 +164,7 @@ const CryptoList = () => {
 
   return (
     <>
-      {cryptoList.lenght === 0 ? (
+      {cryptoList.length === 0 ? (
         <Loader />
       ) : (
         <Grid
